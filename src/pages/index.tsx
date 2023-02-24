@@ -1,29 +1,19 @@
-import {
-  Box,
-  Container,
-  Link,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Container, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import TypeWriter from "@/components/TypeWriter";
 import Copyright from "@/components/Copyright";
 
 export default function Home() {
-  const theme = useTheme();
-  const isSmallerScreen = useMediaQuery(theme.breakpoints.down("sm"));
-
   return (
     <>
-      <Navbar />
       <Head>
         <title>Sung-Yan Hsieh</title>
         <meta name="description" content="Sung-Yan Hsieh's personal website" />
         <meta name="og:title" content="Sung-Yan Hsieh" />
         <link rel="icon" href="/internet.png" />
       </Head>
+      <Navbar />
       <Container
         maxWidth="xl"
         sx={{
@@ -46,13 +36,13 @@ export default function Home() {
           <Typography
             variant="h3"
             fontWeight={"bold"}
-            sx={{ fontSize: isSmallerScreen ? "2rem" : "3rem" }}
+            sx={{ fontSize: { xs: "2rem", md: "3rem" } }}
           >
             Hi, I'm Sung-Yan Hsieh
           </Typography>
         </Box>
         <Box height={"2rem"} sx={{ my: 2 }}>
-          <Typography sx={{ fontSize: isSmallerScreen ? "1.7rem" : "2rem" }}>
+          <Typography sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}>
             <TypeWriter
               sentences={[
                 "I solve problems.",
@@ -65,9 +55,9 @@ export default function Home() {
         <Box
           maxWidth="sm"
           sx={{
-            my: isSmallerScreen ? 4 : 0,
-            textAlign: isSmallerScreen ? "center" : "left",
-            width: isSmallerScreen ? "100%" : "auto",
+            my: { xs: 2, md: 4 },
+            textAlign: { xs: "center", md: "left" },
+            width: { xs: "100%", md: "50%" },
           }}
         >
           <Typography
@@ -76,14 +66,9 @@ export default function Home() {
             sx={{ my: 2 }}
           >
             I'm a MS CS new grad at{" "}
-            <Link
-              href="https://ucsd.edu/"
-              target="_blank"
-              sx={{ mx: 1 }}
-              rel="noreferrer"
-            >
+            <Link href="https://ucsd.edu/" target="_blank" rel="noreferrer">
               UC San Diego
-            </Link>
+            </Link>{" "}
             focusing on the field of Human-Computer Interaction.
           </Typography>
           <Typography
@@ -100,7 +85,7 @@ export default function Home() {
             sx={{ my: 2 }}
           >
             What interests me the most is <b>Web Development</b>,{" "}
-            <b>UI/UX Design</b> and <b>Data Visualization</b>.
+            <b>UI/UX Design</b> and <b>Computer Security</b>.
           </Typography>
         </Box>
         <Box
