@@ -15,7 +15,7 @@ interface Props {
   title: string;
   skills: string[];
   githubUrl?: string;
-  url: string;
+  url?: string;
   description: string[];
   imagePaths: string[];
 }
@@ -48,7 +48,7 @@ export default function ProjectCard(props: Props) {
             </Typography>
             <Box>
               {props.githubUrl && (
-                <Link href={props.githubUrl} color="inherit">
+                <Link href={props.githubUrl} color="inherit" target={"_blank"}>
                   <BsGithub
                     style={{
                       width: "1.6rem",
@@ -58,14 +58,16 @@ export default function ProjectCard(props: Props) {
                   />
                 </Link>
               )}
-              <Link href={props.url} color="inherit">
-                <FaExternalLinkAlt
-                  style={{
-                    width: "1.6rem",
-                    height: "1.6rem",
-                  }}
-                />
-              </Link>
+              {props.url && (
+                <Link href={props.url} color="inherit" target={"_blank"}>
+                  <FaExternalLinkAlt
+                    style={{
+                      width: "1.6rem",
+                      height: "1.6rem",
+                    }}
+                  />
+                </Link>
+              )}
             </Box>
           </Container>
           <Container
@@ -81,14 +83,15 @@ export default function ProjectCard(props: Props) {
               fontSize={{ xs: "0.8rem", md: "1rem" }}
               fontWeight={"bold"}
             >
-              Skills:
-              {props.skills.map((skill) => (
+              Skills:{" "}
+              {props.skills.map((skill, index) => (
                 <span
                   style={{
+                    color: "css:var(--text-secondary)",
                     fontWeight: "normal",
-                    padding: "0 0.3rem 0 0.3rem",
                   }}
                 >
+                  {index === 0 ? "" : " / "}
                   {skill}
                 </span>
               ))}

@@ -1,6 +1,6 @@
-import { Box, Button, Card, CardMedia, IconButton } from "@mui/material";
+import { Box, Card, CardMedia, IconButton } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface CarouselProps {
   imagePaths: string[];
@@ -21,16 +21,6 @@ export default function Carousel({ imagePaths }: CarouselProps) {
       prevIndex === lastIndex ? 0 : prevIndex + 1
     );
   };
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setActiveIndex((prevIndex) =>
-        prevIndex === lastIndex ? 0 : prevIndex + 1
-      );
-    }, 3000); // Change slide every 3 seconds
-
-    return () => clearInterval(intervalId);
-  }, [lastIndex]);
 
   return (
     <Box sx={{ position: "relative" }}>

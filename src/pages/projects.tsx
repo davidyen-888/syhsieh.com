@@ -66,25 +66,6 @@ export default function Projects() {
             imagePaths={project.imagePaths}
           />
         ))}
-        {/* <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <Carousel
-              imagePaths={[
-                "/images/projectImg/bearmaps1.jpeg",
-                "/images/projectImg/bearmaps2.jpeg",
-              ]}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Lizard
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card> */}
       </Container>
     </>
   );
