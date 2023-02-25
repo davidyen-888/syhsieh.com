@@ -30,7 +30,7 @@ export async function getStaticPaths() {
 }
 
 export default function Post({ postData }: PostProps) {
-  console.log(postData);
+  // console.log(postData);
 
   return (
     <>

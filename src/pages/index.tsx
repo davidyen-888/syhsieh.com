@@ -38,7 +38,7 @@ export default function Home() {
             fontWeight={"bold"}
             sx={{ fontSize: { xs: "2rem", md: "3rem" } }}
           >
-            Hi, I'm Sung-Yan Hsieh
+            Hi👋, I'm Sung-Yan Hsieh
           </Typography>
         </Box>
         <Box height={"2rem"} sx={{ my: 2 }}>
