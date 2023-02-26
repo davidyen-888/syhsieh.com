@@ -1,11 +1,29 @@
-import { Container, Box, Typography, Link } from "@mui/material";
+import { useState } from "react";
+import {
+  Container,
+  Box,
+  Typography,
+  Link,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import Head from "next/head";
-import { getSortedPostsData } from "../../lib/posts";
+import { getAllPostsData } from "../../lib/posts";
 import Date from "@/components/Date";
 import Navbar from "@/components/Navbar";
 
+interface allPostsData {
+  id: string;
+  date: string;
+  title: string;
+}
+
+type SortOption = "asc" | "desc";
+
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = getAllPostsData();
   return {
     props: {
       allPostsData,
@@ -13,7 +31,19 @@ export async function getStaticProps() {
   };
 }
 
-export default function PostsPage({ allPostsData }: any) {
+export default function PostsPage({
+  allPostsData,
+}: {
+  allPostsData: allPostsData[];
+}) {
+  const [sortOrder, setSortOrder] = useState<SortOption>("desc");
+
+  const sortedPosts = allPostsData.sort((a, b) =>
+    sortOrder === "asc"
+      ? a.date.localeCompare(b.date)
+      : b.date.localeCompare(a.date)
+  );
+
   return (
     <>
       <Head>
@@ -37,7 +67,26 @@ export default function PostsPage({ allPostsData }: any) {
             Blog Posts
           </Typography>
         </Box>
-        {allPostsData.map(({ id, date, title }: any) => (
+        <Box height={"2rem"} sx={{ my: 2, textAlign: "center" }}>
+          <Typography sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}>
+            A list of blog posts I've written.
+          </Typography>
+        </Box>
+        {/* Filter by date */}
+        <FormControl sx={{ my: 2 }}>
+          <InputLabel id="sort-order-label">Sort by date:</InputLabel>
+          <Select
+            labelId="sort-order-label"
+            id="sort-order"
+            value={sortOrder}
+            label="Sort by date"
+            onChange={(e: any) => setSortOrder(e.target.value as SortOption)}
+          >
+            <MenuItem value="desc">Newest first</MenuItem>
+            <MenuItem value="asc">Oldest first</MenuItem>
+          </Select>
+        </FormControl>
+        {sortedPosts.map(({ id, date, title }: allPostsData) => (
           <Box key={id}>
             <Link href={`/posts/${id}`} color="inherit">
               <Box sx={{ my: 2 }}>
