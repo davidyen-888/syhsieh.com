@@ -15,7 +15,7 @@ export default function About() {
       <Container
         maxWidth="xl"
         sx={{
-          my: 4,
+          my: "6rem",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",

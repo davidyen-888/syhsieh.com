@@ -17,7 +17,7 @@ export default function Home() {
       <Container
         maxWidth="xl"
         sx={{
-          my: 4,
+          my: "6rem",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -88,14 +88,8 @@ export default function Home() {
             <b>UI/UX Design</b> and <b>Computer Security</b>.
           </Typography>
         </Box>
-        <Box
-          sx={{
-            my: 4,
-          }}
-        >
-          <Copyright />
-        </Box>
       </Container>
+      <Copyright />
     </>
   );
 }

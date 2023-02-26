@@ -55,7 +55,7 @@ export default function PostsPage({
       <Navbar />
       <Container
         sx={{
-          my: 4,
+          my: "6rem",
         }}
       >
         <Box sx={{ my: 2 }}>
