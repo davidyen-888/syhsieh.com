@@ -1,15 +1,17 @@
 import {
   Box,
   Card,
-  CardActions,
   CardContent,
   Container,
-  Link,
+  List,
+  ListItem,
+  ListItemIcon,
   Typography,
 } from "@mui/material";
 import Carousel from "./Carousel";
-import { BsGithub } from "react-icons/bs";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { BsFillStarFill, BsFillTriangleFill, BsGithub } from "react-icons/bs";
+import { FaExternalLinkAlt, FaRegHandPointRight } from "react-icons/fa";
+import IconLink from "./IconLink";
 
 interface Props {
   title: string;
@@ -46,27 +48,30 @@ export default function ProjectCard(props: Props) {
             >
               {props.title}
             </Typography>
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
               {props.githubUrl && (
-                <Link href={props.githubUrl} color="inherit" target={"_blank"}>
-                  <BsGithub
-                    style={{
-                      width: "1.6rem",
-                      height: "1.6rem",
-                      marginRight: "1rem",
-                    }}
-                  />
-                </Link>
+                <IconLink
+                  href={props.githubUrl}
+                  icon={BsGithub}
+                  size={"1.6rem"}
+                  color={"inherit"}
+                />
               )}
               {props.url && (
-                <Link href={props.url} color="inherit" target={"_blank"}>
-                  <FaExternalLinkAlt
-                    style={{
-                      width: "1.6rem",
-                      height: "1.6rem",
-                    }}
-                  />
-                </Link>
+                <IconLink
+                  href={props.url}
+                  icon={FaExternalLinkAlt}
+                  size={"1.6rem"}
+                  color={"inherit"}
+                />
               )}
             </Box>
           </Container>
@@ -99,28 +104,36 @@ export default function ProjectCard(props: Props) {
           </Container>
           <Container sx={{ my: "1rem" }}>
             <Carousel imagePaths={props.imagePaths} />
-            <Typography
-              variant="body1"
-              color={"text.secondary"}
-              sx={{
-                fontSize: { xs: "0.8rem", md: "1rem" },
-                mt: "1rem",
-                lineHeight: "2rem",
-              }}
-            >
-              {props.description.map((bulletPoint) => (
-                <li
+            {props.description.map((bulletPoint) => (
+              <List>
+                <ListItem
                   style={{
                     color: "css:var(--text-secondary)",
+                    padding: "0",
                   }}
                 >
-                  {bulletPoint}
-                </li>
-              ))}
-            </Typography>
+                  <Typography
+                    variant="body1"
+                    color={"text.secondary"}
+                    sx={{
+                      fontSize: { xs: "0.8rem", md: "1rem" },
+                      mt: "1rem",
+                      lineHeight: "2rem",
+                    }}
+                  >
+                    <BsFillTriangleFill
+                      style={{
+                        transform: "rotate(90deg)",
+                        marginRight: "0.5rem",
+                      }}
+                    />
+                    {bulletPoint}
+                  </Typography>
+                </ListItem>
+              </List>
+            ))}
           </Container>
         </CardContent>
-        <CardActions></CardActions>
       </Card>
     </>
   );

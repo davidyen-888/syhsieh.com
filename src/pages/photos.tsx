@@ -1,6 +1,7 @@
 import { Box, Container, Typography } from "@mui/material";
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function Photos() {
   return (
@@ -15,7 +16,7 @@ export default function Photos() {
       <Container
         maxWidth="xl"
         sx={{
-          my: "6rem",
+          mt: "6rem",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -45,6 +46,7 @@ export default function Photos() {
           </Typography>
         </Box>
       </Container>
+      <Footer />
     </>
   );
 }

@@ -13,6 +13,7 @@ import Head from "next/head";
 import { getAllPostsData } from "../../lib/posts";
 import Date from "@/components/Date";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface allPostsData {
   id: string;
@@ -55,7 +56,7 @@ export default function PostsPage({
       <Navbar />
       <Container
         sx={{
-          my: "6rem",
+          mt: "6rem",
         }}
       >
         <Box sx={{ my: 2 }}>
@@ -108,6 +109,7 @@ export default function PostsPage({
           </Box>
         ))}
       </Container>
+      <Footer />
     </>
   );
 }

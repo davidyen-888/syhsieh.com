@@ -13,6 +13,7 @@ import Navbar from "@/components/Navbar";
 import { projects } from "projects/projects";
 import ProjectCard from "@/components/ProjectCard";
 import Carousel from "@/components/Carousel";
+import Footer from "@/components/Footer";
 
 export default function Projects() {
   return (
@@ -27,7 +28,7 @@ export default function Projects() {
       <Container
         maxWidth="xl"
         sx={{
-          my: "6rem",
+          mt: "6rem",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -67,6 +68,7 @@ export default function Projects() {
           />
         ))}
       </Container>
+      <Footer />
     </>
   );
 }

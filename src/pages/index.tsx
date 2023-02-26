@@ -2,7 +2,7 @@ import { Box, Container, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import TypeWriter from "@/components/TypeWriter";
-import Copyright from "@/components/Copyright";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
       <Container
         maxWidth="xl"
         sx={{
-          my: "6rem",
+          mt: "6rem",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -89,7 +89,7 @@ export default function Home() {
           </Typography>
         </Box>
       </Container>
-      <Copyright />
+      <Footer />
     </>
   );
 }
