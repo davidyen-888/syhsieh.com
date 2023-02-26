@@ -3,6 +3,7 @@ import MuiLink from "@mui/material/Link";
 import { Box, Container, Divider } from "@mui/material";
 import IconLink from "./IconLink";
 import { BsEnvelopeFill, BsGithub, BsLinkedin } from "react-icons/bs";
+import { IoDocumentTextSharp } from "react-icons/io5";
 
 export default function Footer() {
   return (
@@ -35,9 +36,16 @@ export default function Footer() {
           <IconLink
             href="mailto:sydv8850@gmail.com"
             icon={BsEnvelopeFill}
-            size={"1.6rem"}
+            size={"1.7rem"}
             color={"inherit"}
             text={"Email"}
+          />
+          <IconLink
+            href="https://www.overleaf.com/read/spkbyvgfvvyz"
+            icon={IoDocumentTextSharp}
+            size={"1.8rem"}
+            color={"inherit"}
+            text={"Resume"}
           />
         </Box>
       </Container>
