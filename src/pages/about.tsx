@@ -1,7 +1,8 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -45,6 +46,55 @@ export default function About() {
             A little bit about me.
           </Typography>
         </Box>
+        <Container
+          maxWidth="md"
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box
+            sx={{
+              mx: 6,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              color={"text.secondary"}
+              sx={{ my: 2 }}
+            >
+              I'm a MS CS new grad at{" "}
+              <Link href="https://ucsd.edu/" target="_blank" rel="noreferrer">
+                UC San Diego
+              </Link>{" "}
+              focusing on the field of Human-Computer Interaction.
+              <br />
+              <br />
+              I'm intersted in full-stack development and reading web-related
+              tech blogs.
+              <br />
+              <br />
+              Besides coding, I enjoy shooting film photos, watching movies,
+              listening to music, and riding my bike to explore the city.
+            </Typography>
+          </Box>
+          <Box>
+            <Image
+              src="/images/profile.jpg"
+              width={250}
+              height={250}
+              alt="Sung-Yan Hsieh's profile picture"
+              priority
+              sizes="30vw"
+              style={{ borderRadius: "20px" }}
+            />
+          </Box>
+        </Container>
       </Container>
       <Footer />
     </>

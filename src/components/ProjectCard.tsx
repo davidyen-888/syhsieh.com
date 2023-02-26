@@ -5,12 +5,11 @@ import {
   Container,
   List,
   ListItem,
-  ListItemIcon,
   Typography,
 } from "@mui/material";
 import Carousel from "./Carousel";
-import { BsFillStarFill, BsFillTriangleFill, BsGithub } from "react-icons/bs";
-import { FaExternalLinkAlt, FaRegHandPointRight } from "react-icons/fa";
+import { BsFillTriangleFill, BsGithub } from "react-icons/bs";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import IconLink from "./IconLink";
 
 interface Props {
@@ -63,6 +62,7 @@ export default function ProjectCard(props: Props) {
                   icon={BsGithub}
                   size={"1.6rem"}
                   color={"inherit"}
+                  text={"Github"}
                 />
               )}
               {props.url && (
@@ -71,6 +71,7 @@ export default function ProjectCard(props: Props) {
                   icon={FaExternalLinkAlt}
                   size={"1.6rem"}
                   color={"inherit"}
+                  text={"Website"}
                 />
               )}
             </Box>

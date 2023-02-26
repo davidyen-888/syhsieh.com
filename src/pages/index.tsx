@@ -17,7 +17,7 @@ export default function Home() {
       <Container
         maxWidth="xl"
         sx={{
-          mt: "6rem",
+          mt: "12rem",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -42,7 +42,7 @@ export default function Home() {
           </Typography>
         </Box>
         <Box height={"2rem"} sx={{ my: 2 }}>
-          <Typography sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}>
+          <Typography sx={{ fontSize: { xs: "1.2rem", md: "1.5rem" } }}>
             <TypeWriter
               sentences={[
                 "I solve problems.",
@@ -55,7 +55,7 @@ export default function Home() {
         <Box
           maxWidth="sm"
           sx={{
-            my: { xs: 2, md: 4 },
+            my: { xs: 1, md: 2 },
             textAlign: { xs: "center", md: "left" },
             width: { xs: "100%", md: "50%" },
           }}
@@ -63,27 +63,13 @@ export default function Home() {
           <Typography
             variant="subtitle1"
             color={"text.secondary"}
-            sx={{ my: 2 }}
+            fontSize={{ xs: "1rem", md: "1.2rem" }}
           >
-            I'm a MS CS new grad at{" "}
-            <Link href="https://ucsd.edu/" target="_blank" rel="noreferrer">
-              UC San Diego
-            </Link>{" "}
-            focusing on the field of Human-Computer Interaction.
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            color={"text.secondary"}
-            sx={{ my: 2 }}
-          >
-            I am always open to new ideas, looking for new challenges and enjoys
-            solving them.
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            color={"text.secondary"}
-            sx={{ my: 2 }}
-          >
+            Welcome to my personal website! I'm excited to share with you my
+            journey, my thoughts, and my creations. Stay awhile and get to know
+            me a little better.
+            <br />
+            <br />
             What interests me the most is <b>Web Development</b>,{" "}
             <b>UI/UX Design</b> and <b>Computer Security</b>.
           </Typography>

@@ -1,18 +1,8 @@
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Container,
-  Link,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import { projects } from "projects/projects";
 import ProjectCard from "@/components/ProjectCard";
-import Carousel from "@/components/Carousel";
 import Footer from "@/components/Footer";
 
 export default function Projects() {
