@@ -27,7 +27,7 @@ export default function ProjectCard(props: Props) {
       <Card
         sx={{
           maxWidth: "50rem",
-          margin: "1rem",
+          marginY: "1rem",
           backgroundColor: "#F9F9F9",
           borderRadius: "1rem",
         }}

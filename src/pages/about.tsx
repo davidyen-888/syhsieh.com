@@ -18,15 +18,7 @@ export default function About() {
           alignItems: "center",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
+        <Box>
           <Typography
             variant="h3"
             fontWeight={"bold"}
@@ -44,19 +36,21 @@ export default function About() {
           maxWidth="md"
           sx={{
             display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: { xs: "center", md: "space-between" },
+            alignItems: "center",
           }}
         >
-          <Box
-            sx={{
-              mx: 6,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <Image
+            src="/images/profile.jpg"
+            width={250}
+            height={250}
+            alt="Sung-Yan Hsieh's profile picture"
+            priority
+            sizes="30vw"
+            style={{ borderRadius: "20px" }}
+          />
+          <Box marginX={{ xs: 2, md: 6 }}>
             <Typography variant="subtitle1" sx={{ my: 2 }}>
               I'm a MS CS new grad at{" "}
               <Link href="https://ucsd.edu/" target="_blank" rel="noreferrer">
@@ -72,17 +66,6 @@ export default function About() {
               Besides coding, I enjoy shooting film photos, watching movies,
               listening to music, and riding my bike to explore the city.
             </Typography>
-          </Box>
-          <Box>
-            <Image
-              src="/images/profile.jpg"
-              width={250}
-              height={250}
-              alt="Sung-Yan Hsieh's profile picture"
-              priority
-              sizes="30vw"
-              style={{ borderRadius: "20px" }}
-            />
           </Box>
         </Container>
       </Container>
