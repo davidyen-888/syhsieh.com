@@ -30,28 +30,28 @@ export default function Footer() {
           <IconLink
             href="https://github.com/davidyen-888"
             icon={BsGithub}
-            size={"1.6rem"}
+            size={32}
             color={"inherit"}
             text={"Github"}
           />
           <IconLink
             href="https://www.linkedin.com/in/david-hsieh-yen/"
             icon={BsLinkedin}
-            size={"1.6rem"}
+            size={32}
             color={"inherit"}
             text={"LinkedIn"}
           />
           <IconLink
             href="mailto:sydv8850@gmail.com"
             icon={BsEnvelopeFill}
-            size={"1.7rem"}
+            size={32}
             color={"inherit"}
             text={"Email"}
           />
           <IconLink
             href="https://www.overleaf.com/read/spkbyvgfvvyz"
             icon={IoDocumentTextSharp}
-            size={"1.8rem"}
+            size={32}
             color={"inherit"}
             text={"Resume"}
           />

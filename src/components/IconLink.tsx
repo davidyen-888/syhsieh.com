@@ -5,7 +5,7 @@ import { useState } from "react";
 type Props = {
   href: string;
   icon: IconType;
-  size?: string;
+  size?: string | number;
   color?: string;
   text?: string;
 };
@@ -28,7 +28,12 @@ const IconLink = ({ href, icon: Icon, size, color, text }: Props) => {
       target="_blank"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      sx={{ display: "flex", flexDirection: "row", position: "relative" }}
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        position: "relative",
+        mx: "0.5rem",
+      }}
     >
       <Box
         sx={{

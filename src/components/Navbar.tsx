@@ -100,7 +100,7 @@ function ResponsiveAppBar(props: NavProps) {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -128,7 +128,7 @@ function ResponsiveAppBar(props: NavProps) {
             ))}
           </Box>
           {/* Dark mode toggle */}
-          <IconButton>
+          <IconButton aria-label="dark mode toggle" color="inherit">
             {props.theme === "dark" ? (
               <Brightness7Icon
                 onClick={() => props.setTheme("light")}

@@ -65,13 +65,16 @@ export default function Home() {
             variant="subtitle1"
             fontSize={{ xs: "1rem", md: "1.2rem" }}
           >
-            Welcome to my personal website! I'm excited to share with you my
-            journey, my thoughts, and my creations. Stay awhile and get to know
-            me a little better.
+            <p>
+              Welcome to my personal website! I'm excited to share with you my
+              journey, my thoughts, and my creations. Stay awhile and get to
+              know me a little better.
+            </p>
             <br />
-            <br />
-            What interests me the most is <b>Web Development</b>,{" "}
-            <b>UI/UX Design</b> and <b>Computer Security</b>.
+            <p>
+              What interests me the most is <b>Web Development</b>,{" "}
+              <b>UI/UX Design</b> and <b>Computer Security</b>.
+            </p>
           </Typography>
         </Box>
       </Container>
