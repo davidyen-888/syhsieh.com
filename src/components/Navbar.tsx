@@ -10,15 +10,22 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { MouseEvent, useState } from "react";
 import { Link } from "@mui/material";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+
+interface NavProps {
+  theme?: string;
+  setTheme: (theme: string) => void;
+}
 
 const pages = [
   { title: "Projects", path: "/projects" },
-  { title: "About", path: "/about" },
   { title: "Blog", path: "/posts" },
-  { title: "Photos", path: "/photos" },
+  { title: "About", path: "/about" },
+  // { title: "Photos", path: "/photos" },
 ];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar(props: NavProps) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
@@ -120,6 +127,20 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
+          {/* Dark mode toggle */}
+          <IconButton>
+            {props.theme === "dark" ? (
+              <Brightness7Icon
+                onClick={() => props.setTheme("light")}
+                sx={{ color: "white" }}
+              />
+            ) : (
+              <Brightness4Icon
+                onClick={() => props.setTheme("dark")}
+                sx={{ color: "white" }}
+              />
+            )}
+          </IconButton>
         </Toolbar>
       </Container>
     </AppBar>

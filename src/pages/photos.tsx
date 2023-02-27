@@ -2,17 +2,11 @@ import { Box, Container, Typography } from "@mui/material";
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ThemeBox from "@/components/ThemeBox";
 
 export default function Photos() {
   return (
-    <>
-      <Head>
-        <title>Photos</title>
-        <meta name="description" content="Sung-Yan Hsieh's photos" />
-        <meta name="og:title" content="Photos" />
-        <link rel="icon" href="/internet.png" />
-      </Head>
-      <Navbar />
+    <ThemeBox title="Photos">
       <Container
         maxWidth="xl"
         sx={{
@@ -46,7 +40,6 @@ export default function Photos() {
           </Typography>
         </Box>
       </Container>
-      <Footer />
-    </>
+    </ThemeBox>
   );
 }

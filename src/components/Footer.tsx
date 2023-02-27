@@ -1,14 +1,21 @@
 import Typography from "@mui/material/Typography";
 import MuiLink from "@mui/material/Link";
-import { Box, Container, Divider } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import IconLink from "./IconLink";
 import { BsEnvelopeFill, BsGithub, BsLinkedin } from "react-icons/bs";
 import { IoDocumentTextSharp } from "react-icons/io5";
 
 export default function Footer() {
   return (
-    <Container sx={{ mt: "6rem", mb: "1rem" }}>
-      <Divider sx={{ my: 2, width: "50%", mx: "auto" }} />
+    <Container sx={{ mt: "6rem", mb: "1.5rem" }}>
+      <hr
+        style={{
+          marginBottom: "2rem",
+          width: "50%",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      />
       <Container>
         <Box
           sx={{
@@ -17,6 +24,7 @@ export default function Footer() {
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
+            my: "1.5rem",
           }}
         >
           <IconLink
@@ -49,7 +57,7 @@ export default function Footer() {
           />
         </Box>
       </Container>
-      <Typography variant="body2" color="text.secondary" align="center">
+      <Typography variant="body2" align="center">
         {"Copyright © "}
         <MuiLink color="inherit" href="/">
           Sung-Yan Hsieh

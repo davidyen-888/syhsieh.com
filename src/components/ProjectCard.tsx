@@ -28,6 +28,8 @@ export default function ProjectCard(props: Props) {
         sx={{
           maxWidth: "50rem",
           margin: "1rem",
+          backgroundColor: "#F9F9F9",
+          borderRadius: "1rem",
         }}
       >
         <CardContent sx={{ display: "flex", flexDirection: "column" }}>
@@ -106,8 +108,9 @@ export default function ProjectCard(props: Props) {
           <Container sx={{ my: "1rem" }}>
             <Carousel imagePaths={props.imagePaths} />
             {props.description.map((bulletPoint) => (
-              <List>
+              <List key={bulletPoint}>
                 <ListItem
+                  key={bulletPoint}
                   style={{
                     color: "css:var(--text-secondary)",
                     padding: "0",

@@ -3,17 +3,11 @@ import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
+import ThemeBox from "@/components/ThemeBox";
 
 export default function About() {
   return (
-    <>
-      <Head>
-        <title>About</title>
-        <meta name="description" content="Sung-Yan Hsieh's about page" />
-        <meta name="og:title" content="About" />
-        <link rel="icon" href="/internet.png" />
-      </Head>
-      <Navbar />
+    <ThemeBox title="About">
       <Container
         maxWidth="xl"
         sx={{
@@ -63,11 +57,7 @@ export default function About() {
               alignItems: "center",
             }}
           >
-            <Typography
-              variant="subtitle1"
-              color={"text.secondary"}
-              sx={{ my: 2 }}
-            >
+            <Typography variant="subtitle1" sx={{ my: 2 }}>
               I'm a MS CS new grad at{" "}
               <Link href="https://ucsd.edu/" target="_blank" rel="noreferrer">
                 UC San Diego
@@ -96,7 +86,6 @@ export default function About() {
           </Box>
         </Container>
       </Container>
-      <Footer />
-    </>
+    </ThemeBox>
   );
 }

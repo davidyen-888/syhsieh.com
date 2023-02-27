@@ -3,6 +3,7 @@ import Head from "next/head";
 import Date from "@/components/Date";
 import { Box, Container, Link, Typography } from "@mui/material";
 import ReactMarkdown from "react-markdown";
+import ThemeBox from "@/components/ThemeBox";
 
 interface PostProps {
   postData: {
@@ -33,16 +34,10 @@ export default function Post({ postData }: PostProps) {
   // console.log(postData);
 
   return (
-    <>
-      <Head>
-        <title>{postData.title}</title>
-        <meta name="description" content="Sung-Yan Hsieh's blog" />
-        <meta name="og:title" content={postData.title} />
-        <link rel="icon" href="/internet.png" />
-      </Head>
+    <ThemeBox title={postData.title}>
       <Container
         sx={{
-          my: 4,
+          mt: "6rem",
         }}
       >
         <Box sx={{ my: 2 }}>
@@ -95,6 +90,6 @@ export default function Post({ postData }: PostProps) {
           </Typography>
         </Box>
       </Container>
-    </>
+    </ThemeBox>
   );
 }

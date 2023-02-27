@@ -14,6 +14,7 @@ import { getAllPostsData } from "../../lib/posts";
 import Date from "@/components/Date";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ThemeBox from "@/components/ThemeBox";
 
 interface allPostsData {
   id: string;
@@ -46,15 +47,9 @@ export default function PostsPage({
   );
 
   return (
-    <>
-      <Head>
-        <title>Posts</title>
-        <meta name="description" content="Sung-Yan Hsieh's blog" />
-        <meta name="og:title" content="Posts" />
-        <link rel="icon" href="/internet.png" />
-      </Head>
-      <Navbar />
+    <ThemeBox title="Blog Posts">
       <Container
+        maxWidth="md"
         sx={{
           mt: "6rem",
         }}
@@ -74,19 +69,23 @@ export default function PostsPage({
           </Typography>
         </Box>
         {/* Filter by date */}
-        <FormControl sx={{ my: 2 }}>
-          <InputLabel id="sort-order-label">Sort by date:</InputLabel>
-          <Select
-            labelId="sort-order-label"
-            id="sort-order"
-            value={sortOrder}
-            label="Sort by date"
-            onChange={(e: any) => setSortOrder(e.target.value as SortOption)}
-          >
-            <MenuItem value="desc">Newest first</MenuItem>
-            <MenuItem value="asc">Oldest first</MenuItem>
-          </Select>
-        </FormControl>
+        <form>
+          <div style={{ margin: "16px 0" }}>
+            <select
+              id="sort-order"
+              value={sortOrder}
+              style={{ padding: "8px", fontSize: "1rem" }}
+              onChange={(e) => setSortOrder(e.target.value as SortOption)}
+            >
+              <option value="desc">
+                <Typography>Newest first</Typography>
+              </option>
+              <option value="asc">
+                <Typography>Oldest first</Typography>
+              </option>
+            </select>
+          </div>
+        </form>
         {sortedPosts.map(({ id, date, title }: allPostsData) => (
           <Box key={id}>
             <Link href={`/posts/${id}`} color="inherit">
@@ -109,7 +108,6 @@ export default function PostsPage({
           </Box>
         ))}
       </Container>
-      <Footer />
-    </>
+    </ThemeBox>
   );
 }

@@ -4,17 +4,11 @@ import Navbar from "@/components/Navbar";
 import { projects } from "projects/projects";
 import ProjectCard from "@/components/ProjectCard";
 import Footer from "@/components/Footer";
+import ThemeBox from "@/components/ThemeBox";
 
 export default function Projects() {
   return (
-    <>
-      <Head>
-        <title>Projects</title>
-        <meta name="description" content="Sung-Yan Hsieh's projects" />
-        <meta name="og:title" content="Projects" />
-        <link rel="icon" href="/internet.png" />
-      </Head>
-      <Navbar />
+    <ThemeBox title="Projects">
       <Container
         maxWidth="xl"
         sx={{
@@ -58,7 +52,6 @@ export default function Projects() {
           />
         ))}
       </Container>
-      <Footer />
-    </>
+    </ThemeBox>
   );
 }

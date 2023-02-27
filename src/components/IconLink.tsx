@@ -46,7 +46,7 @@ const IconLink = ({ href, icon: Icon, size, color, text }: Props) => {
               opacity: showText ? 1 : 0,
               transition: "opacity 0.2s ease",
               position: "absolute",
-              top: "-1.2rem",
+              top: "-1.5rem",
               color: "#666",
               borderRadius: "0.5rem",
               padding: "0.25rem 0.5rem",

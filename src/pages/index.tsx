@@ -3,17 +3,18 @@ import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import TypeWriter from "@/components/TypeWriter";
 import Footer from "@/components/Footer";
+import ThemeBox from "@/components/ThemeBox";
 
 export default function Home() {
   return (
-    <>
-      <Head>
+    <ThemeBox>
+      {/* <Head>
         <title>Sung-Yan Hsieh</title>
         <meta name="description" content="Sung-Yan Hsieh's personal website" />
         <meta name="og:title" content="Sung-Yan Hsieh" />
         <link rel="icon" href="/internet.png" />
-      </Head>
-      <Navbar />
+      </Head> */}
+      {/* <Navbar theme="dark" setTheme={() => {}} /> */}
       <Container
         maxWidth="xl"
         sx={{
@@ -62,7 +63,6 @@ export default function Home() {
         >
           <Typography
             variant="subtitle1"
-            color={"text.secondary"}
             fontSize={{ xs: "1rem", md: "1.2rem" }}
           >
             Welcome to my personal website! I'm excited to share with you my
@@ -75,7 +75,6 @@ export default function Home() {
           </Typography>
         </Box>
       </Container>
-      <Footer />
-    </>
+    </ThemeBox>
   );
 }
