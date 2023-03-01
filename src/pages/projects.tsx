@@ -1,9 +1,6 @@
 import { Box, Container, Typography } from "@mui/material";
-import Head from "next/head";
-import Navbar from "@/components/Navbar";
 import { projects } from "projects/projects";
 import ProjectCard from "@/components/ProjectCard";
-import Footer from "@/components/Footer";
 import ThemeBox from "@/components/ThemeBox";
 
 export default function Projects() {

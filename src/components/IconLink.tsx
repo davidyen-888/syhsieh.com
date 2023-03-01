@@ -44,7 +44,7 @@ const IconLink = ({ href, icon: Icon, size, color, text }: Props) => {
           textAlign: "center",
         }}
       >
-        <Icon style={{ width: size, height: size, margin: "0.5rem" }} />
+        <Icon style={{ width: size, height: size, margin: "0.4rem" }} />
         {text && (
           <Typography
             style={{

@@ -1,19 +1,7 @@
 import { useState } from "react";
-import {
-  Container,
-  Box,
-  Typography,
-  Link,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
-import Head from "next/head";
+import { Container, Box, Typography, Link } from "@mui/material";
 import { getAllPostsData } from "../../lib/posts";
 import Date from "@/components/Date";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import ThemeBox from "@/components/ThemeBox";
 
 interface allPostsData {

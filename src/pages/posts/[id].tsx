@@ -1,5 +1,4 @@
 import { getAllPostIds, getPostData } from "../../lib/posts";
-import Head from "next/head";
 import Date from "@/components/Date";
 import { Box, Container, Link, Typography } from "@mui/material";
 import ReactMarkdown from "react-markdown";

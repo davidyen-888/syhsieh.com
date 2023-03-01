@@ -1,7 +1,4 @@
 import { Box, Container, Link, Typography } from "@mui/material";
-import Head from "next/head";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import Image from "next/image";
 import ThemeBox from "@/components/ThemeBox";
 

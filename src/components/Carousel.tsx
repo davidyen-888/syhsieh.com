@@ -25,7 +25,15 @@ export default function Carousel({ imagePaths }: CarouselProps) {
   return (
     <Box sx={{ position: "relative" }}>
       <Card sx={{ position: "relative", overflow: "hidden" }}>
-        <CardMedia component="img" image={imagePaths[activeIndex]} />
+        <CardMedia
+          component="img"
+          image={imagePaths[activeIndex]}
+          alt="project image"
+          sx={{
+            height: { xs: "10rem", md: "30rem" },
+            objectFit: { xs: "contain", md: "scale-down" },
+          }}
+        />
         {/* only show icon if imagePaths has more than 1 image */}
         {imagePaths.length > 1 && (
           <>

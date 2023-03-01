@@ -1,8 +1,5 @@
-import { Box, Container, Link, Typography } from "@mui/material";
-import Head from "next/head";
-import Navbar from "@/components/Navbar";
+import { Box, Container, Typography } from "@mui/material";
 import TypeWriter from "@/components/TypeWriter";
-import Footer from "@/components/Footer";
 import ThemeBox from "@/components/ThemeBox";
 
 export default function Home() {
