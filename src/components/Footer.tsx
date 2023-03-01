@@ -4,6 +4,7 @@ import { Box, Container } from "@mui/material";
 import IconLink from "./IconLink";
 import { BsEnvelopeFill, BsGithub, BsLinkedin } from "react-icons/bs";
 import { IoDocumentTextSharp } from "react-icons/io5";
+import VisitorCount from "./VisitorCount";
 
 export default function Footer() {
   return (
@@ -63,6 +64,7 @@ export default function Footer() {
           Sung-Yan Hsieh
         </MuiLink>{" "}
         {new Date().getFullYear()}.
+        <VisitorCount />
       </Typography>
     </Container>
   );

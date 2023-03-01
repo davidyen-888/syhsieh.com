@@ -15,8 +15,15 @@ export default function count() {
   });
 
   return (
-    <div>
-      {count ? <p>The current visitor count is: {count}</p> : <p>Loading...</p>}
-    </div>
+    <span>
+      {count ? (
+        <p>
+          You are the
+          <strong> {count}</strong>th visitor!
+        </p>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </span>
   );
 }
