@@ -130,12 +130,12 @@ function ResponsiveAppBar(props: NavProps) {
           {/* Dark mode toggle */}
           <IconButton aria-label="dark mode toggle" color="inherit">
             {props.theme === "dark" ? (
-              <Brightness7Icon
+              <Brightness4Icon
                 onClick={() => props.setTheme("light")}
                 sx={{ color: "white" }}
               />
             ) : (
-              <Brightness4Icon
+              <Brightness7Icon
                 onClick={() => props.setTheme("dark")}
                 sx={{ color: "white" }}
               />
