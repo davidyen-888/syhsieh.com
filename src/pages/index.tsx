@@ -5,13 +5,6 @@ import ThemeBox from "@/components/ThemeBox";
 export default function Home() {
   return (
     <ThemeBox>
-      {/* <Head>
-        <title>Sung-Yan Hsieh</title>
-        <meta name="description" content="Sung-Yan Hsieh's personal website" />
-        <meta name="og:title" content="Sung-Yan Hsieh" />
-        <link rel="icon" href="/internet.png" />
-      </Head> */}
-      {/* <Navbar theme="dark" setTheme={() => {}} /> */}
       <Container
         maxWidth="xl"
         sx={{
