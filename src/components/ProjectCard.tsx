@@ -26,7 +26,7 @@ export default function ProjectCard(props: Props) {
     <>
       <Card
         sx={{
-          maxWidth: "70rem",
+          maxWidth: "60rem",
           margin: "1rem",
           backgroundColor: "#F9F9F9",
           borderRadius: "1rem",
@@ -121,7 +121,6 @@ export default function ProjectCard(props: Props) {
                     color={"text.secondary"}
                     sx={{
                       fontSize: { xs: "0.8rem", md: "1rem" },
-                      mt: "1rem",
                       lineHeight: "2rem",
                     }}
                   >
