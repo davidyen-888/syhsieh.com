@@ -1,21 +1,49 @@
+import { useState, useEffect, useRef } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import ThemeBox from "@/components/ThemeBox";
 import PhotoCard from "@/components/PhotoCard";
+import useSwr from "swr";
+import { useInView } from "react-intersection-observer";
 
-interface PhotosData {
-  photosData: {
-    data: {
-      id: string;
-      media_type: string;
-      media_url: string;
-      permalink: string;
-      timestamp: string;
-    }[];
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+export default function Photos(props: any) {
+  const [photos, setPhotos] = useState<any[]>([]);
+  const [nextUrl, setNextUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { data, error } = useSwr(
+    nextUrl ||
+      `https://graph.instagram.com/me/media?fields=id,media_url&access_token=${props.accessToken}`,
+    fetcher
+  );
+
+  const { ref, inView } = useInView({ threshold: 1 });
+
+  useEffect(() => {
+    if (data) {
+      // checking photo.id to prevent duplicates
+      const newPhotos = data.data.filter(
+        (photo: any) => !photos.some((p) => p.id === photo.id)
+      );
+      setPhotos((photos) => [...photos, ...newPhotos]);
+      setNextUrl(data.paging.next);
+      setLoading(false);
+    }
+  }, [data]);
+
+  const loadMore = () => {
+    if (!loading && nextUrl) {
+      setLoading(true);
+    }
   };
-}
 
-export default function Photos(photosData: PhotosData) {
-  const photos = photosData.photosData.data;
+  useEffect(() => {
+    if (inView) {
+      loadMore();
+    }
+  }, [inView]);
+
+  if (error) return <div>failed to load</div>;
 
   return (
     <ThemeBox title="Photos">
@@ -71,19 +99,16 @@ export default function Photos(photosData: PhotosData) {
             ))}
           </Grid>
         </Box>
+        <div ref={ref} />
       </Container>
     </ThemeBox>
   );
 }
 
 export const getStaticProps = async () => {
-  const url = `https://graph.instagram.com/me/media?fields=id,media_type,media_url,permalink,timestamp&access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}`;
-  const res = await fetch(url);
-  const photosData = await res.json();
-
   return {
     props: {
-      photosData,
+      accessToken: process.env.INSTAGRAM_ACCESS_TOKEN,
     },
   };
 };

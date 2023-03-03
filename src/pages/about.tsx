@@ -1,5 +1,5 @@
 import { Box, Container, Link, Typography } from "@mui/material";
-import Image from "next/image";
+import Image from "mui-image";
 import ThemeBox from "@/components/ThemeBox";
 
 export default function About() {
@@ -40,11 +40,9 @@ export default function About() {
         >
           <Image
             src="/images/profile.jpg"
-            width={250}
-            height={250}
+            width={320}
+            duration={2000}
             alt="Sung-Yan Hsieh's profile picture"
-            priority
-            sizes="30vw"
             style={{ borderRadius: "20px" }}
           />
           <Box marginX={{ xs: 2, md: 6 }}>

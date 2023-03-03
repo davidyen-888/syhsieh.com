@@ -22,7 +22,7 @@ export default function count() {
           <strong> {count}</strong>th visitor!
         </span>
       ) : (
-        <span>Loading...</span>
+        <span></span>
       )}
     </p>
   );
