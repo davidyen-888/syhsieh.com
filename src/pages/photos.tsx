@@ -3,21 +3,29 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import ThemeBox from "@/components/ThemeBox";
 import PhotoCard from "@/components/PhotoCard";
 import useSwr from "swr";
-import { useInView } from "react-intersection-observer";
+import LRUCache from "lru-cache";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const cache = new LRUCache({ max: 100 });
+
+const fetcher = async (url: string) => {
+  const cached = cache.get(url);
+  if (cached) {
+    return Promise.resolve(cached);
+  }
+  const res = await fetch(url);
+  const data = await res.json();
+  cache.set(url, data);
+  return data;
+};
 
 export default function Photos(props: any) {
   const [photos, setPhotos] = useState<any[]>([]);
   const [nextUrl, setNextUrl] = useState(null);
-  const [loading, setLoading] = useState(false);
   const { data, error } = useSwr(
     nextUrl ||
-      `https://graph.instagram.com/me/media?fields=id,media_url&access_token=${props.accessToken}`,
+      `https://graph.instagram.com/me/media?fields=id,media_url&access_token=${props.accessToken}&limit=100`,
     fetcher
   );
-
-  const { ref, inView } = useInView({ threshold: 1 });
 
   useEffect(() => {
     if (data) {
@@ -26,22 +34,13 @@ export default function Photos(props: any) {
         (photo: any) => !photos.some((p) => p.id === photo.id)
       );
       setPhotos((photos) => [...photos, ...newPhotos]);
-      setNextUrl(data.paging.next);
-      setLoading(false);
+      // check if there is a next page
+      if (data.paging && data.paging.next) {
+        setNextUrl(data.paging.next);
+      }
+      // setLoading(false);
     }
   }, [data]);
-
-  const loadMore = () => {
-    if (!loading && nextUrl) {
-      setLoading(true);
-    }
-  };
-
-  useEffect(() => {
-    if (inView) {
-      loadMore();
-    }
-  }, [inView]);
 
   if (error) return <div>failed to load</div>;
 
@@ -99,7 +98,6 @@ export default function Photos(props: any) {
             ))}
           </Grid>
         </Box>
-        <div ref={ref} />
       </Container>
     </ThemeBox>
   );

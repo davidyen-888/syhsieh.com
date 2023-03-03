@@ -22,7 +22,7 @@ const pages = [
   { title: "Projects", path: "/projects" },
   { title: "Blog", path: "/posts" },
   { title: "About", path: "/about" },
-  // { title: "Photos", path: "/photos" },
+  { title: "Photos", path: "/photos" },
 ];
 
 function ResponsiveAppBar(props: NavProps) {
