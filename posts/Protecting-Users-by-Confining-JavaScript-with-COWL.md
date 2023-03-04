@@ -3,7 +3,7 @@ title: "Protecting Users by Confining JavaScript with COWL"
 date: "2022-05-23"
 ---
 
-<https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-stefan.pdf>
+[Protecting Users by Confining JavaScript with COWL](https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-stefan.pdf>)
 
 ## Problem
 
@@ -80,4 +80,4 @@ Key concepts
 
 [COWL: A Confinement System for the Web](https://cowl.ws/)
 
-[](http://www.scs.stanford.edu/~deian/pubs/stefan:2014:protecting-slides.pdf)
+[COWL Slide](http://www.scs.stanford.edu/~deian/pubs/stefan:2014:protecting-slides.pdf)
