@@ -25,7 +25,7 @@ const ThemeBox = (props: any) => {
         <title>{props.title || "Sung-Yan Hsieh"} </title>
         <meta name="description" content="Sung-Yan Hsieh's personal website" />
         <meta name="og:title" content={props.title || "Sung-Yan Hsieh"} />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
       <Navbar theme={theme} setTheme={setTheme} />
       {children}
