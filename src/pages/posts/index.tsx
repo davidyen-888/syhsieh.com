@@ -53,7 +53,8 @@ export default function PostsPage({
         </Box>
         <Box height={"2rem"} sx={{ my: 2, textAlign: "center" }}>
           <Typography sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}>
-            A list of blog posts I've written.
+            {/* A list of blog posts I've written. */}
+            Demo now.(Will integrate with Notion soon)
           </Typography>
         </Box>
         {/* Filter by date */}

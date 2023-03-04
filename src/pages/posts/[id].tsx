@@ -35,6 +35,7 @@ export default function Post({ postData }: PostProps) {
   return (
     <ThemeBox title={postData.title}>
       <Container
+        maxWidth="md"
         sx={{
           mt: "6rem",
         }}
