@@ -1,28 +1,25 @@
 import useSWR from "swr";
 
-export default function count() {
-  const { data: count } = useSWR("./api/count", async (url: string) => {
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    });
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
-    const data = await response.json();
-    return data.Count;
-  });
+export default function count() {
+  const { data: count } = useSWR("./api/count", fetcher);
+  const { data: count2 } = useSWR("../api/count", fetcher);
 
   return (
     <p>
       {count ? (
         <span>
           You are the
-          <strong> {count}</strong>th visitor!
+          <strong> {count.Count}</strong>th visitor!
+        </span>
+      ) : count2 ? (
+        <span>
+          You are the
+          <strong> {count2.Count}</strong>th visitor!
         </span>
       ) : (
-        <span></span>
+        <span>Loading...</span>
       )}
     </p>
   );
