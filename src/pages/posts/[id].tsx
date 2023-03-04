@@ -65,13 +65,47 @@ export default function Post({ postData }: PostProps) {
         >
           <ReactMarkdown
             components={{
-              // add space between paragraphs
               p: ({ node, ...props }) => (
-                <p {...props} style={{ margin: "1.5rem 0" }} />
+                <p
+                  {...props}
+                  style={{ margin: "1.5rem 0", lineHeight: "2rem" }}
+                />
               ),
-              // add tab on ul
+              h1: ({ node, ...props }) => (
+                <h1 {...props} style={{ margin: "1.5rem 0" }} />
+              ),
+              h2: ({ node, ...props }) => (
+                <h2 {...props} style={{ margin: "1.5rem 0" }} />
+              ),
+              h3: ({ node, ...props }) => (
+                <h3 {...props} style={{ margin: "1.5rem 0" }} />
+              ),
+              h4: ({ node, ...props }) => (
+                <h4 {...props} style={{ margin: "1.5rem 0" }} />
+              ),
+              h5: ({ node, ...props }) => (
+                <h5 {...props} style={{ margin: "1.5rem 0" }} />
+              ),
+              h6: ({ node, ...props }) => (
+                <h6 {...props} style={{ margin: "1.5rem 0" }} />
+              ),
+              ol: ({ node, ...props }) => (
+                <ol
+                  {...props}
+                  style={{ marginLeft: "2rem", lineHeight: "2rem" }}
+                />
+              ),
               ul: ({ node, ...props }) => (
-                <ul {...props} style={{ marginLeft: "2rem" }} />
+                <ul
+                  {...props}
+                  style={{ marginLeft: "2rem", lineHeight: "2rem" }}
+                />
+              ),
+              blockquote: ({ node, ...props }) => (
+                <blockquote
+                  {...props}
+                  style={{ marginLeft: "2rem", lineHeight: "2rem" }}
+                />
               ),
             }}
           >
