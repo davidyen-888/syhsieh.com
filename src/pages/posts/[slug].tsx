@@ -3,14 +3,8 @@ import { Box, Container, Link, Typography } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import ThemeBox from "@/components/ThemeBox";
 import NotionService from "@/lib/notionService";
-import {
-  GetStaticProps,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-  PreviewData,
-} from "next";
-import { ParsedUrlQuery } from "querystring";
 import { useTheme } from "next-themes";
+import { InferGetStaticPropsType } from "next";
 
 export async function getStaticPaths() {
   const notionService = new NotionService();
@@ -27,9 +21,7 @@ export async function getStaticPaths() {
   };
 }
 
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext<ParsedUrlQuery, PreviewData>
-) => {
+export const getStaticProps = async (context: any) => {
   const notionService = new NotionService();
 
   const postData = await notionService.getSingleBlogPost(

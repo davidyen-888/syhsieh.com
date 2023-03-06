@@ -8,7 +8,7 @@ export default function Home() {
       <Container
         maxWidth="xl"
         sx={{
-          mt: "12rem",
+          mt: "10rem",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -62,8 +62,8 @@ export default function Home() {
             </p>
             <br />
             <p>
-              What interests me the most is <b>Web Development</b>,{" "}
-              <b>UI/UX Design</b> and <b>Computer Security</b>.
+              What interests me the most now is <b>Web Development</b> and{" "}
+              <b>UI/UX Design</b>.
             </p>
           </Typography>
         </Box>
