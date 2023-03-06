@@ -3,7 +3,12 @@ import useSWR from "swr";
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default function count() {
-  const { data: count } = useSWR("./api/count", fetcher);
+  const { data: count } = useSWR("./api/count", fetcher, {
+    onErrorRetry: (error) => {
+      // Never retry on 404.
+      if (error.status === 404) return;
+    },
+  });
   const { data: count2 } = useSWR("../api/count", fetcher);
 
   return (
