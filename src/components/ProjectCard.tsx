@@ -8,9 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import Carousel from "./Carousel";
-import { BsFillTriangleFill, BsGithub } from "react-icons/bs";
+import { BsCircleFill, BsGithub } from "react-icons/bs";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import IconLink from "./IconLink";
+import { useTheme } from "next-themes";
 
 interface Props {
   title: string;
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export default function ProjectCard(props: Props) {
+  const { theme } = useTheme();
   return (
     <>
       <Card
@@ -124,10 +126,11 @@ export default function ProjectCard(props: Props) {
                       lineHeight: "2rem",
                     }}
                   >
-                    <BsFillTriangleFill
+                    <BsCircleFill
                       style={{
-                        transform: "rotate(90deg)",
                         marginRight: "0.5rem",
+                        scale: "0.5",
+                        transform: "translateY(0.2rem)",
                       }}
                     />
                     {bulletPoint}

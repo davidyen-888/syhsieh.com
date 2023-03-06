@@ -10,6 +10,7 @@ import {
   PreviewData,
 } from "next";
 import { ParsedUrlQuery } from "querystring";
+import { useTheme } from "next-themes";
 
 export async function getStaticPaths() {
   const notionService = new NotionService();
@@ -51,6 +52,67 @@ export default function Post({
   markdown,
   post,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { theme } = useTheme();
+
+  const markdownComponents = {
+    p: ({ children }: { children: React.ReactNode }) => (
+      <p style={{ margin: "1.5rem 0", lineHeight: "2rem" }}>{children}</p>
+    ),
+    h1: ({ children }: { children: React.ReactNode }) => (
+      <h1 style={{ margin: "1.5rem 0" }}> {children}</h1>
+    ),
+    h2: ({ children }: { children: React.ReactNode }) => (
+      <h2 style={{ margin: "1.5rem 0" }}> {children}</h2>
+    ),
+    ul: ({ children }: { children: React.ReactNode }) => (
+      <ul style={{ marginLeft: "2rem", lineHeight: "2rem" }}>{children}</ul>
+    ),
+    ol: ({ children }: { children: React.ReactNode }) => (
+      <ol style={{ marginLeft: "2rem", lineHeight: "2rem" }}>{children}</ol>
+    ),
+    li: ({ children }: { children: React.ReactNode }) => (
+      <li style={{ margin: "0.5rem 0" }}>{children}</li>
+    ),
+    img: ({ src, alt }: any) => (
+      <img
+        src={src}
+        alt={alt}
+        style={{
+          maxWidth: "100%",
+          height: "auto",
+          margin: "1.5rem 0",
+        }}
+      />
+    ),
+    code: ({ node, inline, className, children }: any) => {
+      const match = /language-(\w+)/.exec(className || "");
+      return !inline && match ? (
+        <Typography
+          fontSize={{ xs: "0.8rem", md: "1rem" }}
+          component="pre"
+          sx={{
+            backgroundColor: theme === "dark" ? "#424242" : "#f5f5f5",
+            borderRadius: "0.5rem",
+            padding: "1rem",
+            margin: "1.5rem 0",
+            overflowX: "auto",
+          }}
+        >
+          <code
+            className={className}
+            style={{
+              color: theme === "dark" ? "#fff" : "#000",
+            }}
+          >
+            {children}
+          </code>
+        </Typography>
+      ) : (
+        <code className={className}>{children}</code>
+      );
+    },
+  };
+
   return (
     <ThemeBox title={post.title}>
       <Container
@@ -78,7 +140,9 @@ export default function Post({
             variant="body1"
             sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}
           >
-            <ReactMarkdown>{markdown}</ReactMarkdown>
+            <ReactMarkdown components={markdownComponents}>
+              {markdown}
+            </ReactMarkdown>
           </Typography>
         </Box>
         <Box sx={{ my: 2 }}>

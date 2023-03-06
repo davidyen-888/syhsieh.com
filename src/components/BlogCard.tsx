@@ -8,9 +8,12 @@ import {
   CardContent,
 } from "@mui/material";
 import Image from "mui-image";
+import { useTheme } from "next-themes";
 import Date from "./Date";
 
 export default function BlogCard(post: BlogPost) {
+  const { theme } = useTheme();
+
   return (
     <Box key={post.id} sx={{ my: 2 }}>
       <Typography
@@ -26,10 +29,10 @@ export default function BlogCard(post: BlogPost) {
         variant="subtitle2"
         sx={{
           fontSize: { xs: "0.8rem", md: "1rem" },
-          color: "grey.700",
+          color: theme === "dark" ? "grey.500" : "grey.800",
         }}
       >
-        Tag:{" "}
+        <b>Tag: </b>
         {post.tags.map((tag) => (
           <span key={tag.id}>{tag.name} </span>
         ))}
@@ -38,10 +41,12 @@ export default function BlogCard(post: BlogPost) {
         variant="subtitle2"
         sx={{
           fontSize: { xs: "0.8rem", md: "1rem" },
-          color: "grey.700",
+          color: theme === "dark" ? "grey.500" : "grey.800",
           mb: 2,
         }}
       >
+        <b>Created: </b>
+
         <Date dateString={post.date} />
       </Typography>
     </Box>
