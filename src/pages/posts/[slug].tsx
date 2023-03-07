@@ -3,10 +3,15 @@ import { Box, Container, Link, Typography } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import ThemeBox from "@/components/ThemeBox";
 import NotionService from "@/lib/notionService";
-import { useTheme } from "next-themes";
 import { InferGetStaticPropsType } from "next";
+import { useEffect, useState } from "react";
+import Prism from "../../utils/prism";
+import { useTheme } from "next-themes";
 
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<{
+  paths: string[];
+  fallback: boolean;
+}> {
   const notionService = new NotionService();
 
   const posts = await notionService.getAllBlogPosts();
@@ -46,6 +51,10 @@ export default function Post({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { theme } = useTheme();
 
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
+
   const markdownComponents = {
     p: ({ children }: { children: React.ReactNode }) => (
       <p style={{ margin: "1.5rem 0", lineHeight: "2rem" }}>{children}</p>
@@ -56,6 +65,9 @@ export default function Post({
     h2: ({ children }: { children: React.ReactNode }) => (
       <h2 style={{ margin: "1.5rem 0" }}> {children}</h2>
     ),
+    h3: ({ children }: { children: React.ReactNode }) => (
+      <h3 style={{ margin: "1.5rem 0" }}> {children}</h3>
+    ),
     ul: ({ children }: { children: React.ReactNode }) => (
       <ul style={{ marginLeft: "2rem", lineHeight: "2rem" }}>{children}</ul>
     ),
@@ -64,6 +76,11 @@ export default function Post({
     ),
     li: ({ children }: { children: React.ReactNode }) => (
       <li style={{ margin: "0.5rem 0" }}>{children}</li>
+    ),
+    a: ({ children }: { children: React.ReactNode }) => (
+      <a target="_blank" rel="noopener noreferrer" style={{ color: "#0070f3" }}>
+        {children}
+      </a>
     ),
     img: ({ src, alt }: any) => (
       <img
@@ -76,14 +93,13 @@ export default function Post({
         }}
       />
     ),
-    code: ({ node, inline, className, children }: any) => {
+    code: ({ inline, className, children }: any) => {
       const match = /language-(\w+)/.exec(className || "");
       return !inline && match ? (
         <Typography
           fontSize={{ xs: "0.8rem", md: "1rem" }}
           component="pre"
           sx={{
-            backgroundColor: theme === "dark" ? "#424242" : "#f5f5f5",
             borderRadius: "0.5rem",
             padding: "1rem",
             margin: "1.5rem 0",
@@ -93,7 +109,7 @@ export default function Post({
           <code
             className={className}
             style={{
-              color: theme === "dark" ? "#fff" : "#000",
+              fontSize: "1rem",
             }}
           >
             {children}
@@ -130,17 +146,18 @@ export default function Post({
         <Box sx={{ my: 2 }}>
           <Typography
             variant="body1"
-            sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}
+            sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}
           >
-            <ReactMarkdown components={markdownComponents}>
-              {markdown}
-            </ReactMarkdown>
+            <ReactMarkdown
+              components={markdownComponents}
+              children={markdown}
+            />
           </Typography>
         </Box>
         <Box sx={{ my: 2 }}>
           <Typography
             variant="body1"
-            sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}
+            sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}
           >
             <Link href="/posts">← Back to all posts</Link>
           </Typography>
