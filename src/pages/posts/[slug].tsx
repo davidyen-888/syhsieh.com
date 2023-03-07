@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import ThemeBox from "@/components/ThemeBox";
 import NotionService from "@/lib/notionService";
 import { InferGetStaticPropsType } from "next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Prism from "../../utils/prism";
 import { useTheme } from "next-themes";
 
@@ -51,10 +51,6 @@ export default function Post({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { theme } = useTheme();
 
-  useEffect(() => {
-    Prism.highlightAll();
-  }, []);
-
   const markdownComponents = {
     p: ({ children }: { children: React.ReactNode }) => (
       <p style={{ margin: "1.5rem 0", lineHeight: "2rem" }}>{children}</p>
@@ -100,6 +96,7 @@ export default function Post({
           fontSize={{ xs: "0.8rem", md: "1rem" }}
           component="pre"
           sx={{
+            backgroundColor: theme === "dark" ? "#424242" : "#f5f5f5",
             borderRadius: "0.5rem",
             padding: "1rem",
             margin: "1.5rem 0",
@@ -109,7 +106,7 @@ export default function Post({
           <code
             className={className}
             style={{
-              fontSize: "1rem",
+              color: theme === "dark" ? "#fff" : "#000",
             }}
           >
             {children}
@@ -120,6 +117,10 @@ export default function Post({
       );
     },
   };
+
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
 
   return (
     <ThemeBox title={post.title}>
