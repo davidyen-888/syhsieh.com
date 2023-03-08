@@ -6,7 +6,6 @@ import NotionService from "@/lib/notionService";
 import { InferGetStaticPropsType } from "next";
 import { useEffect, useState } from "react";
 import Prism from "../../utils/prism";
-// import { useTheme } from "next-themes";
 
 export async function getStaticPaths(): Promise<{
   paths: string[];
@@ -49,7 +48,6 @@ export default function Post({
   markdown,
   post,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  // const { theme } = useTheme();
   const [prismLoaded, setPrismLoaded] = useState(false);
 
   const markdownComponents = {
@@ -90,33 +88,33 @@ export default function Post({
         }}
       />
     ),
-    // code: ({ inline, className, children }: any) => {
-    //   const match = /language-(\w+)/.exec(className || "");
-    //   return !inline && match ? (
-    //     <Typography
-    //       fontSize={{ xs: "0.8rem", md: "1rem" }}
-    //       component="pre"
-    //       sx={{
-    //         backgroundColor: theme === "dark" ? "#424242" : "#f5f5f5",
-    //         borderRadius: "0.5rem",
-    //         padding: "1rem",
-    //         margin: "1.5rem 0",
-    //         overflowX: "auto",
-    //       }}
-    //     >
-    //       <code
-    //         className={className}
-    //         style={{
-    //           color: theme === "dark" ? "#fff" : "#000",
-    //         }}
-    //       >
-    //         {children}
-    //       </code>
-    //     </Typography>
-    //   ) : (
-    //     <code className={className}>{children}</code>
-    //   );
-    // },
+    pre: ({ children }: { children: React.ReactNode }) => (
+      <pre
+        style={{
+          fontSize: "1rem",
+        }}
+      >
+        {children}
+      </pre>
+    ),
+    code: ({
+      children,
+      className,
+    }: {
+      children: React.ReactNode;
+      className: string;
+    }) => {
+      return (
+        <code
+          className={className}
+          style={{
+            fontSize: "1rem",
+          }}
+        >
+          {children}
+        </code>
+      );
+    },
   };
 
   useEffect(() => {
