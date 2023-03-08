@@ -4,9 +4,9 @@ import ReactMarkdown from "react-markdown";
 import ThemeBox from "@/components/ThemeBox";
 import NotionService from "@/lib/notionService";
 import { InferGetStaticPropsType } from "next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Prism from "../../utils/prism";
-import { useTheme } from "next-themes";
+// import { useTheme } from "next-themes";
 
 export async function getStaticPaths(): Promise<{
   paths: string[];
@@ -49,7 +49,8 @@ export default function Post({
   markdown,
   post,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
+  const [prismLoaded, setPrismLoaded] = useState(false);
 
   const markdownComponents = {
     p: ({ children }: { children: React.ReactNode }) => (
@@ -89,38 +90,46 @@ export default function Post({
         }}
       />
     ),
-    code: ({ inline, className, children }: any) => {
-      const match = /language-(\w+)/.exec(className || "");
-      return !inline && match ? (
-        <Typography
-          fontSize={{ xs: "0.8rem", md: "1rem" }}
-          component="pre"
-          sx={{
-            backgroundColor: theme === "dark" ? "#424242" : "#f5f5f5",
-            borderRadius: "0.5rem",
-            padding: "1rem",
-            margin: "1.5rem 0",
-            overflowX: "auto",
-          }}
-        >
-          <code
-            className={className}
-            style={{
-              color: theme === "dark" ? "#fff" : "#000",
-            }}
-          >
-            {children}
-          </code>
-        </Typography>
-      ) : (
-        <code className={className}>{children}</code>
-      );
-    },
+    // code: ({ inline, className, children }: any) => {
+    //   const match = /language-(\w+)/.exec(className || "");
+    //   return !inline && match ? (
+    //     <Typography
+    //       fontSize={{ xs: "0.8rem", md: "1rem" }}
+    //       component="pre"
+    //       sx={{
+    //         backgroundColor: theme === "dark" ? "#424242" : "#f5f5f5",
+    //         borderRadius: "0.5rem",
+    //         padding: "1rem",
+    //         margin: "1.5rem 0",
+    //         overflowX: "auto",
+    //       }}
+    //     >
+    //       <code
+    //         className={className}
+    //         style={{
+    //           color: theme === "dark" ? "#fff" : "#000",
+    //         }}
+    //       >
+    //         {children}
+    //       </code>
+    //     </Typography>
+    //   ) : (
+    //     <code className={className}>{children}</code>
+    //   );
+    // },
   };
 
   useEffect(() => {
-    Prism.highlightAll();
+    import("prismjs").then(() => {
+      setPrismLoaded(true);
+    });
   }, []);
+
+  useEffect(() => {
+    if (prismLoaded) {
+      Prism.highlightAll();
+    }
+  }, [prismLoaded]);
 
   return (
     <ThemeBox title={post.title}>
