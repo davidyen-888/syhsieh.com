@@ -88,7 +88,7 @@ export default function Post({
         }}
       />
     ),
-    pre: ({ children }: { children: React.ReactNode }) => (
+    pre: ({ children }: { children: any }) => (
       <pre
         style={{
           fontSize: "1rem",
@@ -97,13 +97,7 @@ export default function Post({
         {children}
       </pre>
     ),
-    code: ({
-      children,
-      className,
-    }: {
-      children: React.ReactNode;
-      className: string;
-    }) => {
+    code: ({ children, className }: { children: any; className: any }) => {
       return (
         <code
           className={className}
