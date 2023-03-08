@@ -97,18 +97,6 @@ export default function Post({
         {children}
       </pre>
     ),
-    code: ({ children, className }: { children: any; className: any }) => {
-      return (
-        <code
-          className={className}
-          style={{
-            fontSize: "1rem",
-          }}
-        >
-          {children}
-        </code>
-      );
-    },
   };
 
   useEffect(() => {
