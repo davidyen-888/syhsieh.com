@@ -10,10 +10,21 @@ import { ParsedUrlQuery } from "querystring";
 import NotionService from "@/lib/notionService";
 import { BlogPost } from "@/types/schema";
 import BlogCard from "@/components/BlogCard";
+import { useState } from "react";
 
 export default function PostsPage({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [sortOrder, setSortOrder] = useState("desc");
+
+  posts.sort((a: BlogPost, b: BlogPost) => {
+    if (sortOrder === "desc") {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    } else {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    }
+  });
+
   return (
     <ThemeBox title="Blog Posts">
       <Container
@@ -36,6 +47,24 @@ export default function PostsPage({
             A list of blog posts I've written.
           </Typography>
         </Box>
+        {/* Filter by date */}
+        <form>
+          <div style={{ margin: "16px 0" }}>
+            <select
+              id="sort-order"
+              value={sortOrder}
+              style={{ padding: "8px", fontSize: "1rem" }}
+              onChange={(e) => setSortOrder(e.target.value)}
+            >
+              <option value="desc">
+                <Typography>Newest first</Typography>
+              </option>
+              <option value="asc">
+                <Typography>Oldest first</Typography>
+              </option>
+            </select>
+          </div>
+        </form>
         <Box sx={{ my: 2 }}>
           {posts.map((post: BlogPost) => (
             <BlogCard key={post.id} {...post} />

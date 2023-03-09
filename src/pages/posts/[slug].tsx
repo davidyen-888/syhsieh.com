@@ -72,11 +72,6 @@ export default function Post({
     li: ({ children }: { children: React.ReactNode }) => (
       <li style={{ margin: "0.5rem 0" }}>{children}</li>
     ),
-    a: ({ children }: { children: React.ReactNode }) => (
-      <a target="_blank" rel="noopener noreferrer" style={{ color: "#0070f3" }}>
-        {children}
-      </a>
-    ),
     img: ({ src, alt }: any) => (
       <img
         src={src}
