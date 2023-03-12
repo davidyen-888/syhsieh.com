@@ -6,6 +6,7 @@ import {
   Container,
   Card,
   CardContent,
+  Button,
 } from "@mui/material";
 import Image from "mui-image";
 import { useTheme } from "next-themes";
@@ -30,24 +31,29 @@ export default function BlogCard(post: BlogPost) {
         sx={{
           fontSize: { xs: "0.8rem", md: "1rem" },
           color: theme === "dark" ? "grey.500" : "grey.800",
+          mb: 1,
         }}
       >
-        <b>Tag: </b>
-        {post.tags.map((tag) => (
-          <span key={tag.id}>{tag.name} </span>
-        ))}
+        <Date dateString={post.date} />
       </Typography>
       <Typography
         variant="subtitle2"
         sx={{
           fontSize: { xs: "0.8rem", md: "1rem" },
           color: theme === "dark" ? "grey.500" : "grey.800",
-          mb: 2,
         }}
       >
-        <b>Created: </b>
-
-        <Date dateString={post.date} />
+        {post.tags.map((tag) => (
+          <Button
+            key={tag.id}
+            variant="outlined"
+            size="small"
+            sx={{ mr: 1 }}
+            href={`/posts/${tag.name}`}
+          >
+            {tag.name}{" "}
+          </Button>
+        ))}
       </Typography>
     </Box>
   );

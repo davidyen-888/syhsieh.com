@@ -42,6 +42,43 @@ export default class NotionService {
         
     }
 
+    async getBlogPostsByTag(tagName: string): Promise<BlogPost[]> {
+        const databaseId = process.env.NOTION_DATABASE_ID ?? '';
+      
+        const response = await this.client.databases.query({
+          database_id: databaseId,
+          filter: {
+            and: [
+              {
+                property: 'Tags',
+                multi_select: {
+                  contains: tagName,
+                },
+              },
+              {
+                property: 'Published',
+                checkbox: {
+                  equals: true,
+                },
+              },
+            ],
+          },
+          sorts: [
+            {
+              property: 'Created',
+              direction: 'descending',
+            },
+          ],
+        });
+      
+        return response.results.map((res) => {
+          return NotionService.pageToPostTransformer(res);
+        });
+      }
+      
+      
+      
+
     async getSingleBlogPost(slug: string): Promise<PostPage> {
         const databaseId = process.env.NOTION_DATABASE_ID ?? '';
 
