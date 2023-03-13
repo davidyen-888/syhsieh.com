@@ -48,18 +48,20 @@ export default function About() {
           <Box marginX={{ xs: 2, md: 6 }}>
             <Typography variant="subtitle1" sx={{ my: 2 }}>
               I'm a MS CS new grad at{" "}
-              <Link href="https://ucsd.edu/" target="_blank" rel="noreferrer">
+              <Link href="https://ucsd.edu/" target="_blank">
                 UC San Diego
               </Link>{" "}
               focusing on the field of Human-Computer Interaction.
               <br />
               <br />
-              I'm intersted in full-stack development and reading web-related
+              I love creating full-stack projects and reading web-related
               tech blogs.
               <br />
               <br />
-              Besides coding, I enjoy shooting film photos, watching movies,
-              listening to music, and riding my bike to explore the city.
+              Besides coding, I enjoy shooting film <Link href="/photos">photos</Link>
+              , watching movies,
+              listening to <Link href="https://open.spotify.com/playlist/6PiMsLtlebCIKkRol89WSo?si=a01c111452984684">music</Link>
+              , and riding my bike to explore the city.
             </Typography>
           </Box>
         </Container>

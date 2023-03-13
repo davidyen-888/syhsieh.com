@@ -16,12 +16,12 @@ export default function count() {
       {count ? (
         <span>
           You are the
-          <strong> {count.Count}</strong>th visitor!
+          <strong> {count.Count}</strong>th visitor since 03/01/2023!
         </span>
       ) : count2 ? (
         <span>
           You are the
-          <strong> {count2.Count}</strong>th visitor!
+          <strong> {count2.Count}</strong>th visitor since 03/01/2023!
         </span>
       ) : (
         <span>Loading...</span>

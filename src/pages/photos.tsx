@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Link, Typography } from "@mui/material";
 import ThemeBox from "@/components/ThemeBox";
 import PhotoCard from "@/components/PhotoCard";
 import useSWR from "swr";
@@ -74,7 +74,7 @@ export default function Photos(props: any) {
         </Box>
         <Box height={"2rem"} sx={{ my: 2 }}>
           <Typography sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}>
-            My photo gallery.
+            The photo gallery from my <Link href="https://instagram.com/solashot.1?igshid=YmMyMTA2M2Y=" target="_blank">Instagram</Link>.
           </Typography>
           {/* Photo Gallery */}
         </Box>

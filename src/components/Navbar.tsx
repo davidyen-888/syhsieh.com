@@ -21,8 +21,8 @@ interface NavProps {
 const pages = [
   { title: "Projects", path: "/projects" },
   { title: "Blog", path: "/posts" },
-  { title: "About", path: "/about" },
   { title: "Photos", path: "/photos" },
+  { title: "About", path: "/about" },
 ];
 
 function ResponsiveAppBar(props: NavProps) {
