@@ -90,6 +90,7 @@ export default function Projects() {
         </Box>
         {projects.map((project) => (
           <ProjectCard
+            key={project.title}
             title={project.title}
             skills={project.skills}
             githubUrl={project.githubUrl}

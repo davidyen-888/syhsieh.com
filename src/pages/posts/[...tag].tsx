@@ -43,6 +43,7 @@ export default function TagPage(props: Props) {
         <Box sx={{ my: 2 }}>
           <Typography
             variant="body1"
+            marginTop={"2rem"}
             sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}
           >
             <Link href="/posts">← Back to all posts</Link>
