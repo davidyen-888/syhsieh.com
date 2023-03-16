@@ -24,6 +24,7 @@ const ThemeBox = (props: any) => {
       <Head>
         <title>{props.title || "Sung-Yan Hsieh"} </title>
         <meta name="description" content="Sung-Yan Hsieh's personal website" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="og:title" content={props.title || "Sung-Yan Hsieh"} />
         <meta property="og:image" content="/images/profile.jpg" />
         <meta property="og:image:width" content="1200" />
