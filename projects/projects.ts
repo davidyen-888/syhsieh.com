@@ -36,7 +36,7 @@ export const projects = [{
     githubUrl: "https://github.com/davidyen-888/stock-tracker",
     url: "https://hello-stock-tracker.vercel.app/",
     description: ["A BootStrap styling stock tracking dashboard with features including add/remove stock list and price history chart with different time scale resolutions"],
-    imagePaths: ["/images/projectImg/stocktracker1.png", "/images/projectImg/stocktracker2.png"],
+    imagePaths: ["/images/projectImg/stocktracker1.png", "/images/projectImg/stocktracker2.png", "/images/projectImg/stocktracker3.png"],
     },
     {
     title: "Blur The Background",
