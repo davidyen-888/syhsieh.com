@@ -42,16 +42,21 @@ const IconLink = ({ href, icon: Icon, size, color, text }: Props) => {
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
+          transition: "transform 0.2s ease",
+          "&:hover": {
+            transform: "scale(1.2)",
+          },
         }}
       >
         <Icon style={{ width: size, height: size, margin: "0.4rem" }} />
         {text && (
           <Typography
+            fontSize={"0.8rem"}
             style={{
               opacity: showText ? 1 : 0,
               transition: "opacity 0.2s ease",
               position: "absolute",
-              top: "-1.5rem",
+              top: "-1.3rem",
               color: "#666",
               borderRadius: "0.5rem",
               padding: "0.25rem 0.5rem",

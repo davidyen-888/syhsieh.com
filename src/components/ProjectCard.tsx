@@ -11,7 +11,6 @@ import Carousel from "./Carousel";
 import { BsCircleFill, BsGithub } from "react-icons/bs";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import IconLink from "./IconLink";
-import { useTheme } from "next-themes";
 
 interface Props {
   title: string;
@@ -23,7 +22,6 @@ interface Props {
 }
 
 export default function ProjectCard(props: Props) {
-  const { theme } = useTheme();
   return (
     <>
       <Card
@@ -41,6 +39,7 @@ export default function ProjectCard(props: Props) {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
+              paddingTop: "1rem",
             }}
           >
             <Typography
