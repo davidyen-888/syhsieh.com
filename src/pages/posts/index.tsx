@@ -10,7 +10,7 @@ import { ParsedUrlQuery } from "querystring";
 import NotionService from "@/lib/notionService";
 import { BlogPost } from "@/types/schema";
 import BlogCard from "@/components/BlogCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function PostsPage({
   posts,
@@ -18,6 +18,49 @@ export default function PostsPage({
   const [sortOrder, setSortOrder] = useState("desc");
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredPosts, setFilteredPosts] = useState(posts);
+  const [tags, setTags] = useState<{ name: string; count: number }[]>([]);
+  const [filterActive, setFilterActive] = useState(false);
+  const [selectedTag, setSelectedTag] = useState("");
+
+  // Extract all unique tags from posts and count number of posts with each tag
+  useEffect(() => {
+    const tagMap = new Map();
+    posts.forEach((post: BlogPost) => {
+      post.tags.forEach((tag) => {
+        const tagName = tag.name.toLowerCase();
+        if (!tagMap.has(tagName)) {
+          tagMap.set(tagName, 1);
+        } else {
+          tagMap.set(tagName, tagMap.get(tagName) + 1);
+        }
+      });
+    });
+    const tagList: { name: string; count: number }[] = [];
+    tagMap.forEach((value, key) => {
+      tagList.push({ name: key, count: value });
+    });
+    setTags(tagList);
+  }, [posts]);
+
+  const filterPostsWithTag = (query: string) => {
+    if (!filterActive) {
+      setSelectedTag(query);
+      const filtered = posts.filter((post: BlogPost) => {
+        const title = post.title.toLowerCase();
+        const tags = post.tags.map((tag) => tag.name.toLowerCase());
+        return (
+          title.includes(query.toLowerCase()) ||
+          tags.includes(query.toLowerCase())
+        );
+      });
+      setFilteredPosts(filtered);
+      setFilterActive(true);
+    } else {
+      setSelectedTag("");
+      setFilteredPosts(posts);
+      setFilterActive(false);
+    }
+  };
 
   const filterPosts = (query: string) => {
     const filtered = posts.filter((post: BlogPost) => {
@@ -67,17 +110,40 @@ export default function PostsPage({
           </Typography>
         </Box>
         {/* Search bar */}
-        <form>
-          <div style={{ margin: "16px 0" }}>
-            <input
-              type="text"
-              placeholder="Search blog posts..."
-              value={searchQuery}
-              style={{ padding: "8px", fontSize: "1rem" }}
-              onChange={handleSearchChange}
-            />
-          </div>
-        </form>
+        <Box sx={{ my: 1 }}>
+          <input
+            type="text"
+            placeholder="Search blog posts..."
+            value={searchQuery}
+            style={{
+              padding: "8px",
+              fontSize: "1rem",
+              width: "100%",
+              height: "2.5rem",
+              border: "1px solid #ccc",
+            }}
+            onChange={handleSearchChange}
+          />
+        </Box>
+        {/* Tag List */}
+        <Box
+          display={"flex"}
+          flexWrap={"wrap"}
+          sx={{ my: 2, justifyContent: "flex-start" }}
+        >
+          {tags.map((tag) => (
+            <Button
+              key={tag.name}
+              variant={selectedTag === tag.name ? "contained" : "outlined"}
+              sx={{ mr: 1 }}
+              onClick={() => {
+                filterPostsWithTag(tag.name);
+              }}
+            >
+              {tag.name} ({tag.count})
+            </Button>
+          ))}
+        </Box>
         {/* Filter by date */}
         <form>
           <div style={{ margin: "16px 0" }}>

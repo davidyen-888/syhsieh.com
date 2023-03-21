@@ -39,8 +39,11 @@ export default function BlogCard(post: BlogPost) {
             key={tag.id}
             variant="outlined"
             size="small"
-            sx={{ mr: 1 }}
-            href={`/posts/${tag.name}`}
+            sx={{
+              mr: 1,
+              color: theme === "dark" ? "grey.500" : "grey.800",
+              borderColor: theme === "dark" ? "grey.500" : "grey.800",
+            }}
           >
             {tag.name}{" "}
           </Button>
