@@ -125,7 +125,7 @@ export default function PostsPage({
               variant={
                 selectedTags.includes(tag.name) ? "contained" : "outlined"
               }
-              sx={{ mr: 1 }}
+              sx={{ margin: "0 8px 8px 0" }}
               onClick={() => {
                 if (selectedTags.includes(tag.name)) {
                   filterPostsWithTags(

@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { Box, Container, Link, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import { useState } from "react";
 
 type Props = {
