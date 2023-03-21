@@ -1,14 +1,5 @@
 import { BlogPost } from "@/types/schema";
-import {
-  Box,
-  Typography,
-  Link,
-  Container,
-  Card,
-  CardContent,
-  Button,
-} from "@mui/material";
-import Image from "mui-image";
+import { Box, Typography, Link, Button } from "@mui/material";
 import { useTheme } from "next-themes";
 import Date from "./Date";
 

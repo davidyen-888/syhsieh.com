@@ -1,4 +1,4 @@
-import { Container, Box, Typography } from "@mui/material";
+import { Container, Box, Typography, Button } from "@mui/material";
 import ThemeBox from "@/components/ThemeBox";
 import {
   GetStaticProps,
@@ -16,8 +16,27 @@ export default function PostsPage({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [sortOrder, setSortOrder] = useState("desc");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredPosts, setFilteredPosts] = useState(posts);
 
-  posts.sort((a: BlogPost, b: BlogPost) => {
+  const filterPosts = (query: string) => {
+    const filtered = posts.filter((post: BlogPost) => {
+      const title = post.title.toLowerCase();
+      const tags = post.tags.map((tag) => tag.name.toLowerCase());
+      return (
+        title.includes(query.toLowerCase()) ||
+        tags.includes(query.toLowerCase())
+      );
+    });
+    setFilteredPosts(filtered);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    filterPosts(e.target.value);
+  };
+
+  filteredPosts.sort((a: BlogPost, b: BlogPost) => {
     if (sortOrder === "desc") {
       return new Date(b.date).getTime() - new Date(a.date).getTime();
     } else {
@@ -47,6 +66,18 @@ export default function PostsPage({
             A list of blog posts I've written.
           </Typography>
         </Box>
+        {/* Search bar */}
+        <form>
+          <div style={{ margin: "16px 0" }}>
+            <input
+              type="text"
+              placeholder="Search blog posts..."
+              value={searchQuery}
+              style={{ padding: "8px", fontSize: "1rem" }}
+              onChange={handleSearchChange}
+            />
+          </div>
+        </form>
         {/* Filter by date */}
         <form>
           <div style={{ margin: "16px 0" }}>
@@ -66,7 +97,8 @@ export default function PostsPage({
           </div>
         </form>
         <Box sx={{ my: 2 }}>
-          {posts.map((post: BlogPost) => (
+          {/* Display filtered posts */}
+          {filteredPosts.map((post: BlogPost) => (
             <BlogCard key={post.id} {...post} />
           ))}
         </Box>
