@@ -15,12 +15,11 @@ import { useEffect, useState } from "react";
 export default function PostsPage({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [sortOrder, setSortOrder] = useState("desc");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredPosts, setFilteredPosts] = useState(posts);
+  const [sortOrder, setSortOrder] = useState<string>("desc");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>(posts);
   const [tags, setTags] = useState<{ name: string; count: number }[]>([]);
-  const [filterActive, setFilterActive] = useState(false);
-  const [selectedTag, setSelectedTag] = useState("");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   // Extract all unique tags from posts and count number of posts with each tag
   useEffect(() => {
@@ -42,24 +41,13 @@ export default function PostsPage({
     setTags(tagList);
   }, [posts]);
 
-  const filterPostsWithTag = (query: string) => {
-    if (!filterActive) {
-      setSelectedTag(query);
-      const filtered = posts.filter((post: BlogPost) => {
-        const title = post.title.toLowerCase();
-        const tags = post.tags.map((tag) => tag.name.toLowerCase());
-        return (
-          title.includes(query.toLowerCase()) ||
-          tags.includes(query.toLowerCase())
-        );
-      });
-      setFilteredPosts(filtered);
-      setFilterActive(true);
-    } else {
-      setSelectedTag("");
-      setFilteredPosts(posts);
-      setFilterActive(false);
-    }
+  const filterPostsWithTags = (tags: string[]) => {
+    setSelectedTags(tags);
+    const filtered = posts.filter((post: BlogPost) => {
+      const tagNames = post.tags.map((tag) => tag.name.toLowerCase());
+      return tags.every((tag) => tagNames.includes(tag));
+    });
+    setFilteredPosts(filtered);
   };
 
   const filterPosts = (query: string) => {
@@ -134,10 +122,18 @@ export default function PostsPage({
           {tags.map((tag) => (
             <Button
               key={tag.name}
-              variant={selectedTag === tag.name ? "contained" : "outlined"}
+              variant={
+                selectedTags.includes(tag.name) ? "contained" : "outlined"
+              }
               sx={{ mr: 1 }}
               onClick={() => {
-                filterPostsWithTag(tag.name);
+                if (selectedTags.includes(tag.name)) {
+                  filterPostsWithTags(
+                    selectedTags.filter((t) => t !== tag.name)
+                  );
+                } else {
+                  filterPostsWithTags([...selectedTags, tag.name]);
+                }
               }}
             >
               {tag.name} ({tag.count})
