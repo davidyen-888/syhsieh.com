@@ -24,6 +24,13 @@ export const projects = [{
     imagePaths: ["/images/projectImg/bearmaps1.jpeg", "/images/projectImg/bearmaps2.jpeg"],
     },
     {
+    title: "GoHTTP",
+    skills: ["Go", "HTTP", "TCP", "Server"],
+    githubUrl: "https://github.com/davidyen-888/GoHTTP",
+    description: ["A simple HTTP/1.1 server implemented with Go that supports GET method, ponds with 200 OK, 400 Bad Request and 404 Not Found status codes and supports static file serving.", "The server can handle multiple concurrent requests and can handle multiple requests from the same client."],     
+    imagePaths: ["/images/projectImg/gohttp1.png", "/images/projectImg/gohttp2.png"],
+    },
+    {
     title: "SurfStore",
     skills: ["Go", "Raft Consensus Algorithm", "gRPC", "cloud-based"],
     url: "https://www.youtube.com/watch?v=3fV4bLehm9o",
