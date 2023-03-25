@@ -27,7 +27,7 @@ export default function PhotoCard({ imgPath }: { imgPath: string }) {
         style={{
           objectFit: isHovered ? "contain" : "cover",
         }}
-        alt="Sung-Yan Hsieh's photo from the photo gallery."
+        alt="Sung-Yan(David) Hsieh's photo from the photo gallery."
       />
     </Container>
   );

@@ -61,7 +61,7 @@ export default function Footer() {
       <Typography variant="body2" align="center">
         {"Copyright © "}
         <MuiLink color="inherit" href="/">
-          Sung-Yan Hsieh
+          Sung-Yan(David) Hsieh
         </MuiLink>{" "}
         {new Date().getFullYear()}.
         <VisitorCount />

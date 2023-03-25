@@ -74,7 +74,14 @@ export default function Photos(props: any) {
         </Box>
         <Box height={"2rem"} sx={{ my: 2 }}>
           <Typography sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}>
-            The photo gallery from my <Link href="https://instagram.com/solashot.1?igshid=YmMyMTA2M2Y=" target="_blank">Instagram</Link>.
+            The photo gallery from my{" "}
+            <Link
+              href="https://instagram.com/solashot.1?igshid=YmMyMTA2M2Y="
+              target="_blank"
+            >
+              Instagram
+            </Link>
+            .
           </Typography>
           {/* Photo Gallery */}
         </Box>

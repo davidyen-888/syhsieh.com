@@ -42,7 +42,7 @@ export default function About() {
             src="/images/profile.jpg"
             width={320}
             duration={2000}
-            alt="Sung-Yan Hsieh's profile picture"
+            alt="Sung-Yan(David) Hsieh's profile picture"
             style={{ borderRadius: "20px" }}
           />
           <Box marginX={{ xs: 2, md: 6 }}>
@@ -54,13 +54,15 @@ export default function About() {
               focusing on the field of Human-Computer Interaction.
               <br />
               <br />
-              I love creating full-stack projects and reading web-related
-              tech blogs.
+              I love creating full-stack projects and reading web-related tech
+              blogs.
               <br />
               <br />
-              Besides coding, I enjoy shooting film <Link href="/photos">photos</Link>
-              , watching movies,
-              listening to <Link href="https://open.spotify.com/playlist/6PiMsLtlebCIKkRol89WSo?si=a01c111452984684">music</Link>
+              Besides coding, I enjoy shooting film{" "}
+              <Link href="/photos">photos</Link>, watching movies, listening to{" "}
+              <Link href="https://open.spotify.com/playlist/6PiMsLtlebCIKkRol89WSo?si=a01c111452984684">
+                music
+              </Link>
               , and riding my bike to explore the city.
             </Typography>
           </Box>
