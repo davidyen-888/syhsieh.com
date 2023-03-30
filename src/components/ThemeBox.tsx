@@ -4,7 +4,12 @@ import Head from "next/head";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-const ThemeBox = (props: any) => {
+type ThemeProps = {
+  title?: string;
+  children: React.ReactNode;
+};
+
+const ThemeBox = (props: ThemeProps) => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
