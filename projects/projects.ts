@@ -16,6 +16,13 @@ export const projects = [{
     imagePaths: ["/images/projectImg/walarm.png"],
     },
     {
+    title: "Zillow Design Project",
+    skills: ["Figma", "User Research", "User Testing"],
+    url: "https://sites.google.com/ucsd.edu/mgt459-team4-zillow/home",
+    description: ["Improved the user experience of Zillow’s mobile app by conducting user research and testing.", "The project involved designing a new feature for the app, which is a user review system and comparison tool."],
+    imagePaths: ["/images/projectImg/zillow1.png", "/images/projectImg/zillow2.png"],
+    },
+    {
     title: "BearMaps",
     skills: ["Java", "KDTree", "Priority Queue", "Trie", "A* Algorithm"],
     githubUrl: "https://github.com/davidyen-888/bearmaps",
