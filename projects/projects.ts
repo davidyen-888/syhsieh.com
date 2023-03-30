@@ -9,7 +9,7 @@
 //   }
 
 export const projects = [{
-    title: "WALARM-Design Project",
+    title: "WALARM Design Project",
     skills: ["Figma"],
     url: "https://sites.google.com/ucsd.edu/walarm-final/",
     description: ["WALARM is an Apple Watch app designed for nurses and respiratory therapists in ICU settings.", "The app solves the problem of alarm fatigue, caused by excessive alarms and missed notifications.", "The solution involves push notifications through haptics, prioritized alarming, on-screen display, and speed messaging and calling.", "Haptics as a new sensory input can alleviate alarm fatigue, and prioritized alarming reduces cognitive load.", "On-screen display helps nurses to quickly identify the alarm, and speed messaging enables efficient communication with doctors."],
