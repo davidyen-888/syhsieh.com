@@ -38,6 +38,14 @@ export const projects = [{
     imagePaths: ["/images/projectImg/surfstore.png"],
     },
     {
+    title: "Hash",
+    skills: ["Haskell"],
+    githubUrl: "https://github.com/tgujar/hash",
+    url: "https://docs.google.com/presentation/d/1dGxcTg50EOtxHqT1pNXl0hmb7_3oZ6UOBvQm7Mznbug/edit?usp=sharing",
+    description: ["A shell written in Haskell that supports features such as parsing/evaluating user-define program, predefined Linux program execution(cd, ls), persistent history storage and tab-based autocomplete."],
+    imagePaths: ["/images/projectImg/hash.png"],
+    },
+    {
     title: "Stock Tracker",
     skills: ["React", "CSS", "BootStrap", "TypeScript", "Finnhub API", "Apexcharts API"],
     githubUrl: "https://github.com/davidyen-888/stock-tracker",
