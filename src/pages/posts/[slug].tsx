@@ -77,7 +77,7 @@ export default function Post({
         src={src}
         alt={alt}
         style={{
-          maxWidth: "100%",
+          width: "100%",
           height: "auto",
           margin: "1.5rem 0",
         }}
