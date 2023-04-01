@@ -72,7 +72,7 @@ export default function Post({
     li: ({ children }: { children: React.ReactNode }) => (
       <li style={{ margin: "0.5rem 0" }}>{children}</li>
     ),
-    a: ({ children, href }: { children: React.ReactNode; href: string }) => (
+    a: ({ children, href }: { children: React.ReactNode; href?: string }) => (
       <a
         href={href}
         target="blank"
