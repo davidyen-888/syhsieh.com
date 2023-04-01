@@ -72,6 +72,19 @@ export default function Post({
     li: ({ children }: { children: React.ReactNode }) => (
       <li style={{ margin: "0.5rem 0" }}>{children}</li>
     ),
+    a: ({ children, href }: { children: React.ReactNode; href: string }) => (
+      <a
+        href={href}
+        target="blank"
+        style={{
+          color: "#0070f3",
+          textDecoration: "underline",
+          cursor: "pointer",
+        }}
+      >
+        {children}
+      </a>
+    ),
     img: ({ src, alt }: any) => (
       <img
         src={src}
