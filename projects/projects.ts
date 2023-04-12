@@ -9,6 +9,14 @@
 //   }
 
 export const projects = [{
+    title: "Easy Apply GPT",
+    skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "OpenAI API", "Vercel"],
+    githubUrl: "https://github.com/davidyen-888/easyapply-gpt",
+    url: "https://easyapplygpt.vercel.app/",
+    description: ["A web application that generates customized answers or cover letters based on the parsed resume and job-related keywords using OpenAI API."],
+    imagePaths: ["/images/projectImg/easyapplygpt.png"],
+    },
+    {
     title: "WALARM Design Project",
     skills: ["Figma"],
     url: "https://sites.google.com/ucsd.edu/walarm-final/",
