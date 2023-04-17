@@ -7,6 +7,12 @@ import { InferGetStaticPropsType } from "next";
 import { useEffect, useState } from "react";
 import Prism from "../../utils/prism";
 
+type NotionContext = {
+  params: {
+    slug: string;
+  };
+};
+
 export async function getStaticPaths(): Promise<{
   paths: string[];
   fallback: boolean;
@@ -25,7 +31,7 @@ export async function getStaticPaths(): Promise<{
   };
 }
 
-export const getStaticProps = async (context: any) => {
+export const getStaticProps = async (context: NotionContext) => {
   const notionService = new NotionService();
 
   const postData = await notionService.getSingleBlogPost(

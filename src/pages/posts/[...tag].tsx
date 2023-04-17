@@ -5,6 +5,7 @@ import NotionService from "@/lib/notionService";
 import BlogCard from "@/components/BlogCard";
 import ThemeBox from "@/components/ThemeBox";
 import { Container, Box, Typography, Link, Button } from "@mui/material";
+import { NextPageContext } from "next";
 
 type Props = {
   tag: string;
@@ -54,7 +55,7 @@ export default function TagPage(props: Props) {
   );
 }
 
-export const getServerSideProps = async (context: any) => {
+export const getServerSideProps = async (context: NextPageContext) => {
   const { tag } = context.query;
   const notionService = new NotionService();
   const posts = await notionService.getBlogPostsByTag(String(tag));

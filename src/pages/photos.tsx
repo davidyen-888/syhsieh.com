@@ -5,6 +5,11 @@ import PhotoCard from "@/components/PhotoCard";
 import useSWR from "swr";
 import LRUCache from "lru-cache";
 
+type Photo = {
+  id: string;
+  media_url: string;
+};
+
 const cache = new LRUCache({ max: 100 });
 
 const fetcher = async (url: string) => {
@@ -18,8 +23,8 @@ const fetcher = async (url: string) => {
   return data;
 };
 
-export default function Photos(props: any) {
-  const [photos, setPhotos] = useState<any[]>([]);
+export default function Photos(props: { accessToken: string }) {
+  const [photos, setPhotos] = useState<Photo[]>([]);
   const [nextUrl, setNextUrl] = useState(null);
   const { data, error } = useSWR(
     nextUrl ||
@@ -31,7 +36,7 @@ export default function Photos(props: any) {
     if (data) {
       // checking photo.id to prevent duplicates
       const newPhotos = data.data.filter(
-        (photo: any) => !photos.some((p) => p.id === photo.id)
+        (photo: Photo) => !photos.some((p) => p.id === photo.id)
       );
       setPhotos((photos) => [...photos, ...newPhotos]);
       // check if there is a next page
@@ -87,7 +92,7 @@ export default function Photos(props: any) {
         </Box>
         <Box sx={{ my: 2 }}>
           <Grid container spacing={2}>
-            {photos.map((photo: any) => (
+            {photos.map((photo: Photo) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={photo.id}>
                 <Box
                   sx={{
