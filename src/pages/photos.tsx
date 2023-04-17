@@ -1,53 +1,13 @@
-import { useState, useEffect } from "react";
 import { Box, Container, Grid, Link, Typography } from "@mui/material";
 import ThemeBox from "@/components/ThemeBox";
 import PhotoCard from "@/components/PhotoCard";
-import useSWR from "swr";
-import LRUCache from "lru-cache";
 
 type Photo = {
   id: string;
   media_url: string;
 };
 
-const cache = new LRUCache({ max: 100 });
-
-const fetcher = async (url: string) => {
-  const cached = cache.get(url);
-  if (cached) {
-    return Promise.resolve(cached);
-  }
-  const res = await fetch(url);
-  const data = await res.json();
-  cache.set(url, data);
-  return data;
-};
-
-export default function Photos(props: { accessToken: string }) {
-  const [photos, setPhotos] = useState<Photo[]>([]);
-  const [nextUrl, setNextUrl] = useState(null);
-  const { data, error } = useSWR(
-    nextUrl ||
-      `https://graph.instagram.com/me/media?fields=id,media_url&access_token=${props.accessToken}&limit=100`,
-    fetcher
-  );
-
-  useEffect(() => {
-    if (data) {
-      // checking photo.id to prevent duplicates
-      const newPhotos = data.data.filter(
-        (photo: Photo) => !photos.some((p) => p.id === photo.id)
-      );
-      setPhotos((photos) => [...photos, ...newPhotos]);
-      // check if there is a next page
-      if (data.paging && data.paging.next) {
-        setNextUrl(data.paging.next);
-      }
-    }
-  }, [data]);
-
-  if (error) return <div>failed to load</div>;
-
+export default function Photos(props: { photos: Photo[] }) {
   return (
     <ThemeBox title="Photos">
       <Container
@@ -92,7 +52,7 @@ export default function Photos(props: { accessToken: string }) {
         </Box>
         <Box sx={{ my: 2 }}>
           <Grid container spacing={2}>
-            {photos.map((photo: Photo) => (
+            {props.photos.map((photo: Photo) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={photo.id}>
                 <Box
                   sx={{
@@ -114,10 +74,31 @@ export default function Photos(props: { accessToken: string }) {
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
+  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
+  const limit = 100;
+  let photos: Photo[] = [];
+
+  // Fetch the first page of photos
+  const firstPageUrl = `https://graph.instagram.com/me/media?fields=id,media_url&access_token=${accessToken}&limit=${limit}`;
+  const firstPageRes = await fetch(firstPageUrl);
+  const firstPageData = await firstPageRes.json();
+
+  // Add the photos to the array
+  photos = photos.concat(firstPageData.data);
+
+  // Fetch the rest of the pages
+  let nextUrl = firstPageData.paging.next;
+  while (nextUrl) {
+    const res = await fetch(nextUrl);
+    const data = await res.json();
+    photos = photos.concat(data.data);
+    nextUrl = data.paging.next;
+  }
+
   return {
     props: {
-      accessToken: process.env.INSTAGRAM_ACCESS_TOKEN,
+      photos,
     },
   };
 };
