@@ -2,7 +2,12 @@ import Typography from "@mui/material/Typography";
 import MuiLink from "@mui/material/Link";
 import { Box, Container } from "@mui/material";
 import IconLink from "./IconLink";
-import { BsEnvelopeFill, BsGithub, BsLinkedin } from "react-icons/bs";
+import {
+  BsEnvelopeFill,
+  BsGithub,
+  BsLinkedin,
+  BsTwitter,
+} from "react-icons/bs";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import VisitorCount from "./VisitorCount";
 
@@ -41,6 +46,13 @@ export default function Footer() {
             size={32}
             color={"inherit"}
             text={"LinkedIn"}
+          />
+          <IconLink
+            href="https://twitter.com/syhsiehdavid"
+            icon={BsTwitter}
+            size={32}
+            color={"inherit"}
+            text={"Twitter"}
           />
           <IconLink
             href="mailto:sydv8850@gmail.com"
