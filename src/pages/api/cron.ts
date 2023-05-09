@@ -12,3 +12,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(error.status || 500).json({ error: error.message });
   }
 }
+
+export async function getStaticProps() {
+  return {
+    props: {
+      deployHook: process.env.DEPLOY_HOOK,
+    },
+  };
+}
