@@ -1,14 +1,17 @@
 import { Box, Container, Typography } from "@mui/material";
 import TypeWriter from "@/components/TypeWriter";
 import ThemeBox from "@/components/ThemeBox";
+import GitHubCalendar from "react-github-calendar";
+import { useTheme } from "next-themes";
 
 export default function Home() {
+  const { theme } = useTheme();
+
   return (
-    <ThemeBox>
+    <ThemeBox title="Sung-Yan(David) Hsieh">
       <Container
-        maxWidth="xl"
         sx={{
-          mt: "10rem",
+          mt: "6rem",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -65,6 +68,16 @@ export default function Home() {
               What interests me the most now is <b>Web Development</b> and{" "}
               <b>UI/UX Design</b>.
             </p>
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            fontSize={{ xs: "1rem", md: "1.2rem" }}
+            sx={{ mt: 2 }}
+          >
+            <GitHubCalendar
+              username="davidyen-888"
+              colorScheme={theme === "dark" ? "dark" : "light"}
+            />
           </Typography>
         </Box>
       </Container>

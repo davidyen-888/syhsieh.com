@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
 import MuiLink from "@mui/material/Link";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Divider } from "@mui/material";
 import IconLink from "./IconLink";
 import {
   BsEnvelopeFill,
@@ -10,16 +10,16 @@ import {
 } from "react-icons/bs";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import VisitorCount from "./VisitorCount";
+import { useTheme } from "next-themes";
 
 export default function Footer() {
+  const { theme } = useTheme();
   return (
-    <Container sx={{ mt: "6rem", mb: "1.5rem" }}>
+    <Container sx={{ mt: "2rem", mb: "1.5rem" }}>
       <hr
         style={{
-          marginBottom: "2rem",
-          width: "50%",
-          marginLeft: "auto",
-          marginRight: "auto",
+          margin: "auto",
+          width: "60%",
         }}
       />
       <Container>
