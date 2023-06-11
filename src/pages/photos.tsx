@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
-import { Box, Container, Grid, Link, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import ThemeBox from "@/components/ThemeBox";
 import PhotoCard from "@/components/PhotoCard";
-import useSWR from "swr";
 import LRUCache from "lru-cache";
 
 type Photo = {
@@ -23,31 +21,7 @@ const fetcher = async (url: string) => {
   return data;
 };
 
-export default function Photos(props: { accessToken: string }) {
-  const [photos, setPhotos] = useState<Photo[]>([]);
-  const [nextUrl, setNextUrl] = useState(null);
-  const { data, error } = useSWR(
-    nextUrl ||
-      `https://graph.instagram.com/me/media?fields=id,media_url&access_token=${props.accessToken}&limit=100`,
-    fetcher
-  );
-
-  useEffect(() => {
-    if (data) {
-      // checking photo.id to prevent duplicates
-      const newPhotos = data.data.filter(
-        (photo: Photo) => !photos.some((p) => p.id === photo.id)
-      );
-      setPhotos((photos) => [...photos, ...newPhotos]);
-      // check if there is a next page
-      if (data.paging && data.paging.next) {
-        setNextUrl(data.paging.next);
-      }
-    }
-  }, [data]);
-
-  if (error) return <div>failed to load</div>;
-
+export default function Photos({ photos }: { photos: Photo[] }) {
   return (
     <ThemeBox title="Photos">
       <Container
@@ -79,20 +53,13 @@ export default function Photos(props: { accessToken: string }) {
         </Box>
         <Box height={"2rem"} sx={{ my: 2 }}>
           <Typography sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}>
-            The photo gallery from my{" "}
-            <Link
-              href="https://instagram.com/solashot.1?igshid=YmMyMTA2M2Y="
-              target="_blank"
-            >
-              Instagram
-            </Link>
-            .
+            My photo gallery.
           </Typography>
           {/* Photo Gallery */}
         </Box>
         <Box sx={{ my: 2 }}>
           <Grid container spacing={2}>
-            {photos.map((photo: Photo) => (
+            {photos.map((photo: any) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={photo.id}>
                 <Box
                   sx={{
@@ -115,9 +82,29 @@ export default function Photos(props: { accessToken: string }) {
 }
 
 export const getStaticProps = async () => {
+  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
+  let photos: Photo[] = [];
+
+  let url = `https://graph.instagram.com/me/media?fields=id,media_url&access_token=${accessToken}&limit=100`;
+
+  while (url) {
+    const data = await fetcher(url);
+    // checking photo.id to prevent duplicates
+    const newPhotos = data.data.filter(
+      (photo: Photo) => !photos.some((p) => p.id === photo.id)
+    );
+    photos = [...photos, ...newPhotos];
+    // check if there is a next page
+    if (data.paging && data.paging.next) {
+      url = data.paging.next;
+    } else {
+      url = "";
+    }
+  }
+
   return {
     props: {
-      accessToken: process.env.INSTAGRAM_ACCESS_TOKEN,
+      photos,
     },
   };
 };
