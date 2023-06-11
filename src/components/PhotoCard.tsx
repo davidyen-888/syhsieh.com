@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import Image from "mui-image";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function PhotoCard({ imgPath }: { imgPath: string }) {
@@ -20,10 +20,11 @@ export default function PhotoCard({ imgPath }: { imgPath: string }) {
       }}
     >
       <Image
+        loader={({ src }) => src}
         src={imgPath}
         width={320}
         height={320}
-        duration={2000}
+        // duration={2000}
         style={{
           objectFit: isHovered ? "contain" : "cover",
         }}
