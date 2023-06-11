@@ -3,6 +3,7 @@ import TypeWriter from "@/components/TypeWriter";
 import ThemeBox from "@/components/ThemeBox";
 import GitHubCalendar from "react-github-calendar";
 import { useTheme } from "next-themes";
+import WavingHand from "@/components/WavingHand";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -30,9 +31,12 @@ export default function Home() {
           <Typography
             variant="h3"
             fontWeight={"bold"}
-            sx={{ fontSize: { xs: "2rem", md: "3rem" } }}
+            sx={{
+              fontSize: { xs: "2rem", md: "3rem" },
+            }}
           >
-            Hi👋, I'm Sung-Yan(David) Hsieh
+            Hi
+            <WavingHand />, I'm Sung-Yan(David) Hsieh
           </Typography>
         </Box>
         <Box height={"2rem"} sx={{ my: 2 }}>
