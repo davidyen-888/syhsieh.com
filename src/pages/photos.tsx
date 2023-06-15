@@ -117,6 +117,6 @@ export const getStaticProps = async () => {
     props: {
       photos,
     },
-    revalidate: 60 * 60, // 1 hour
+    revalidate: 60, // 1 minute
   };
 };
