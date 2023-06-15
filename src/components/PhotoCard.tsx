@@ -24,7 +24,6 @@ export default function PhotoCard({ imgPath }: { imgPath: string }) {
         src={imgPath}
         width={320}
         height={320}
-        // duration={2000}
         style={{
           objectFit: isHovered ? "contain" : "cover",
         }}
