@@ -83,24 +83,35 @@ export default function Photos({ photos }: { photos: Photo[] }) {
 
 export const getStaticProps = async () => {
   const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
-  let photos: Photo[] = [];
+  const photos: Photo[] = [];
+  const seenPhotoIds = new Set<string>(); // To prevent duplicates
 
   let url = `https://graph.instagram.com/me/media?fields=id,media_url&access_token=${accessToken}&limit=100`;
+  const fetchPromises: Promise<any>[] = [];
 
   while (url) {
+    fetchPromises.push(fetcher(url));
     const data = await fetcher(url);
-    // checking photo.id to prevent duplicates
-    const newPhotos = data.data.filter(
-      (photo: Photo) => !photos.some((p) => p.id === photo.id)
-    );
-    photos = [...photos, ...newPhotos];
-    // check if there is a next page
+    if (data.data) {
+      // Filter out photos that have already been seen
+      const newPhotos = data.data.filter(
+        (photo: Photo) => !seenPhotoIds.has(photo.id)
+      );
+      // Add new photos to the list of photos
+      newPhotos.forEach((photo: Photo) => seenPhotoIds.add(photo.id));
+      photos.push(...newPhotos);
+    } else {
+      console.error(data);
+    }
+
     if (data.paging && data.paging.next) {
       url = data.paging.next;
     } else {
       url = "";
     }
   }
+
+  await Promise.all(fetchPromises); // Wait for all concurrent requests to complete
 
   return {
     props: {

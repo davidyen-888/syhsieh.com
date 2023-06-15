@@ -20,7 +20,7 @@ export default function PhotoCard({ imgPath }: { imgPath: string }) {
       }}
     >
       <Image
-        loader={({ src }) => src}
+        unoptimized
         src={imgPath}
         width={320}
         height={320}
