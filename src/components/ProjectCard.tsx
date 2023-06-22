@@ -11,8 +11,9 @@ import Carousel from "./Carousel";
 import { BsCircleFill, BsGithub } from "react-icons/bs";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import IconLink from "./IconLink";
+import { useTheme } from "next-themes";
 
-interface Props {
+interface ProjectProps {
   title: string;
   skills: string[];
   githubUrl?: string;
@@ -21,14 +22,16 @@ interface Props {
   imagePaths: string[];
 }
 
-export default function ProjectCard(props: Props) {
+export default function ProjectCard(props: ProjectProps) {
+  const { theme } = useTheme();
+
   return (
     <>
       <Card
         sx={{
           maxWidth: "60rem",
           margin: "1rem",
-          backgroundColor: "#F9F9F9",
+          backgroundColor: theme === "dark" ? "#1f1f1f" : "#f9f9f9",
           borderRadius: "1rem",
         }}
       >
@@ -46,6 +49,7 @@ export default function ProjectCard(props: Props) {
               gutterBottom
               variant="h4"
               component="div"
+              color={theme === "dark" ? "#f9f9f9" : "#1f1f1f"}
               sx={{ fontSize: { xs: "1.5rem", md: "2rem" } }}
             >
               {props.title}
@@ -64,7 +68,7 @@ export default function ProjectCard(props: Props) {
                   href={props.githubUrl}
                   icon={BsGithub}
                   size={"1.6rem"}
-                  color={"inherit"}
+                  color={theme === "dark" ? "#f9f9f9" : "#1f1f1f"}
                   text={"Github"}
                 />
               )}
@@ -73,7 +77,7 @@ export default function ProjectCard(props: Props) {
                   href={props.url}
                   icon={FaExternalLinkAlt}
                   size={"1.6rem"}
-                  color={"inherit"}
+                  color={theme === "dark" ? "#f9f9f9" : "#1f1f1f"}
                   text={"Website"}
                 />
               )}
@@ -88,7 +92,7 @@ export default function ProjectCard(props: Props) {
           >
             <Typography
               variant="body2"
-              color="text.secondary"
+              color={theme === "dark" ? "#eee" : "#1f1f1f"}
               fontSize={{ xs: "0.8rem", md: "1rem" }}
               fontWeight={"bold"}
             >
@@ -96,7 +100,6 @@ export default function ProjectCard(props: Props) {
               {props.skills.map((skill, index) => (
                 <span
                   style={{
-                    color: "css:var(--text-secondary)",
                     fontWeight: "normal",
                   }}
                 >
@@ -113,13 +116,12 @@ export default function ProjectCard(props: Props) {
                 <ListItem
                   key={bulletPoint}
                   style={{
-                    color: "css:var(--text-secondary)",
                     padding: "0",
                   }}
                 >
                   <Typography
                     variant="body1"
-                    color={"text.secondary"}
+                    color={theme === "dark" ? "#eee" : "#1f1f1f"}
                     sx={{
                       fontSize: { xs: "0.8rem", md: "1rem" },
                       lineHeight: "2rem",
