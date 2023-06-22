@@ -31,7 +31,7 @@ export default function ProjectCard(props: ProjectProps) {
         sx={{
           maxWidth: "60rem",
           margin: "1rem",
-          backgroundColor: theme === "dark" ? "#1f1f1f" : "#f9f9f9",
+          backgroundColor: theme === "dark" ? "#2f2f2f" : "#f9f9f9",
           borderRadius: "1rem",
         }}
       >
