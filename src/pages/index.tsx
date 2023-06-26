@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from "@mui/material";
 import TypeWriter from "@/components/TypeWriter";
-import ThemeBox from "@/components/ThemeBox";
+import Layout from "@/components/Layout";
 import GitHubCalendar from "react-github-calendar";
 import { useTheme } from "next-themes";
 import WavingHand from "@/components/WavingHand";
@@ -9,7 +9,7 @@ export default function Home() {
   const { theme } = useTheme();
 
   return (
-    <ThemeBox title="Sung-Yan(David) Hsieh">
+    <Layout title="Sung-Yan(David) Hsieh">
       <Container
         sx={{
           mt: "6rem",
@@ -85,6 +85,6 @@ export default function Home() {
           </Typography>
         </Box>
       </Container>
-    </ThemeBox>
+    </Layout>
   );
 }

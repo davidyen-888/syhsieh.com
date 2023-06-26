@@ -4,12 +4,12 @@ import Head from "next/head";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-type ThemeProps = {
+type LayoutProps = {
   title?: string;
   children: React.ReactNode;
 };
 
-const ThemeBox = (props: ThemeProps) => {
+const Layout = (props: LayoutProps) => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -50,4 +50,4 @@ const ThemeBox = (props: ThemeProps) => {
   );
 };
 
-export default ThemeBox;
+export default Layout;

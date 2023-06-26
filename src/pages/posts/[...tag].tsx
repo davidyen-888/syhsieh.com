@@ -3,7 +3,7 @@
 import { BlogPost } from "@/types/schema";
 import NotionService from "@/lib/notionService";
 import BlogCard from "@/components/BlogCard";
-import ThemeBox from "@/components/ThemeBox";
+import Layout from "@/components/Layout";
 import { Container, Box, Typography, Link, Button } from "@mui/material";
 import { NextPageContext } from "next";
 
@@ -16,7 +16,7 @@ export default function TagPage(props: Props) {
   const { tag, posts } = props;
 
   return (
-    <ThemeBox title="Blog Posts">
+    <Layout title="Blog Posts">
       <Container
         maxWidth="md"
         sx={{
@@ -51,7 +51,7 @@ export default function TagPage(props: Props) {
           </Typography>
         </Box>
       </Container>
-    </ThemeBox>
+    </Layout>
   );
 }
 

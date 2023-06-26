@@ -1,7 +1,7 @@
 import Date from "@/components/Date";
 import { Box, Container, Link, Typography } from "@mui/material";
 import ReactMarkdown from "react-markdown";
-import ThemeBox from "@/components/ThemeBox";
+import Layout from "@/components/Layout";
 import NotionService from "@/lib/notionService";
 import { InferGetStaticPropsType } from "next";
 import { useEffect, useState } from "react";
@@ -126,7 +126,7 @@ export default function Post({
   }, [prismLoaded]);
 
   return (
-    <ThemeBox title={post.title}>
+    <Layout title={post.title}>
       <Container
         maxWidth="md"
         sx={{
@@ -168,6 +168,6 @@ export default function Post({
           </Typography>
         </Box>
       </Container>
-    </ThemeBox>
+    </Layout>
   );
 }

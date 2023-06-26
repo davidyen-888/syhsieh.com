@@ -1,5 +1,5 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
-import ThemeBox from "@/components/ThemeBox";
+import Layout from "@/components/Layout";
 import PhotoCard from "@/components/PhotoCard";
 import LRUCache from "lru-cache";
 
@@ -23,7 +23,7 @@ const fetcher = async (url: string) => {
 
 export default function Photos({ photos }: { photos: Photo[] }) {
   return (
-    <ThemeBox title="Photos">
+    <Layout title="Photos">
       <Container
         maxWidth="xl"
         sx={{
@@ -77,7 +77,7 @@ export default function Photos({ photos }: { photos: Photo[] }) {
           </Grid>
         </Box>
       </Container>
-    </ThemeBox>
+    </Layout>
   );
 }
 

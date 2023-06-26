@@ -1,11 +1,11 @@
 import { Box, Container, Typography } from "@mui/material";
 import { projects } from "projects/projects";
 import ProjectCard from "@/components/ProjectCard";
-import ThemeBox from "@/components/ThemeBox";
+import Layout from "@/components/Layout";
 
 export default function Projects() {
   return (
-    <ThemeBox title="Projects">
+    <Layout title="Projects">
       <Container
         maxWidth="xl"
         sx={{
@@ -100,6 +100,6 @@ export default function Projects() {
           />
         ))}
       </Container>
-    </ThemeBox>
+    </Layout>
   );
 }

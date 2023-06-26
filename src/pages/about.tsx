@@ -1,10 +1,10 @@
 import { Box, Container, Link, Typography } from "@mui/material";
 import Image from "mui-image";
-import ThemeBox from "@/components/ThemeBox";
+import Layout from "@/components/Layout";
 
 export default function About() {
   return (
-    <ThemeBox title="About">
+    <Layout title="About">
       <Container
         maxWidth="xl"
         sx={{
@@ -68,6 +68,6 @@ export default function About() {
           </Box>
         </Container>
       </Container>
-    </ThemeBox>
+    </Layout>
   );
 }

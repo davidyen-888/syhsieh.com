@@ -1,5 +1,5 @@
 import { Container, Box, Typography, Button } from "@mui/material";
-import ThemeBox from "@/components/ThemeBox";
+import Layout from "@/components/Layout";
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -76,7 +76,7 @@ export default function PostsPage({
   });
 
   return (
-    <ThemeBox title="Blog Posts">
+    <Layout title="Blog Posts">
       <Container
         maxWidth="md"
         sx={{
@@ -165,7 +165,7 @@ export default function PostsPage({
           ))}
         </Box>
       </Container>
-    </ThemeBox>
+    </Layout>
   );
 }
 
