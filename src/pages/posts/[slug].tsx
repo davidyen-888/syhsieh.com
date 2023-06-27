@@ -125,8 +125,12 @@ export default function Post({
           justifyContent={"space-between"}
           gap={{ xs: 2 }}
         >
-          {newerPost && <PostNavLink post={newerPost} isNewer={true} />}
-          {olderPost && <PostNavLink post={olderPost} isNewer={false} />}
+          <Box display={"flex"}>
+            {newerPost && <PostNavLink post={newerPost} isNewer={true} />}
+          </Box>
+          <Box display={"flex"}>
+            {olderPost && <PostNavLink post={olderPost} isNewer={false} />}
+          </Box>
         </Grid>
         <Box my={2}>
           <Typography
