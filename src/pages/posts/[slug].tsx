@@ -120,9 +120,9 @@ export default function Post({
           </Typography>
         </Box>
         <Grid
-          mt={"4rem"}
+          mt={"2rem"}
           container
-          justifyContent={"space-between"}
+          justifyContent={{ xs: "center", md: "space-between" }}
           gap={{ xs: 2 }}
         >
           <Box display={"flex"}>
