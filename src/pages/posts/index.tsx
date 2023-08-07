@@ -1,12 +1,6 @@
 import { Container, Box, Typography, Button } from "@mui/material";
 import Layout from "@/components/Layout";
-import {
-  GetStaticProps,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-  PreviewData,
-} from "next";
-import { ParsedUrlQuery } from "querystring";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import NotionService from "@/lib/notionService";
 import { BlogPost } from "@/types/schema";
 import BlogCard from "@/components/BlogCard";
@@ -169,9 +163,7 @@ export default function PostsPage({
   );
 }
 
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext<ParsedUrlQuery, PreviewData>
-) => {
+export const getStaticProps: GetStaticProps = async () => {
   const notionService = new NotionService();
   const posts = await notionService.getAllBlogPosts();
 

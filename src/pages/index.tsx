@@ -1,11 +1,17 @@
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { Box, Container, Typography } from "@mui/material";
 import TypeWriter from "@/components/TypeWriter";
 import Layout from "@/components/Layout";
-import GitHubCalendar from "react-github-calendar";
 import { useTheme } from "next-themes";
 import WavingHand from "@/components/WavingHand";
+import NotionService from "@/lib/notionService";
+import Link from "next/link";
+import { BlogPost } from "@/types/schema";
+import Date from "@/components/Date";
 
-export default function Home() {
+export default function Home({
+  posts,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const { theme } = useTheme();
 
   return (
@@ -20,27 +26,23 @@ export default function Home() {
         }}
       >
         <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-          }}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          textAlign={"center"}
         >
           <Typography
             variant="h3"
             fontWeight={"bold"}
-            sx={{
-              fontSize: { xs: "2rem", md: "3rem" },
-            }}
+            fontSize={{ xs: "2rem", md: "3rem" }}
           >
             Hi
             <WavingHand />, I'm Sung-Yan(David) Hsieh
           </Typography>
         </Box>
-        <Box height={"2rem"} sx={{ my: 2 }}>
-          <Typography sx={{ fontSize: { xs: "1.2rem", md: "1.5rem" } }}>
+        <Box height={"2rem"} my={2}>
+          <Typography fontSize={{ xs: "1.2rem", md: "1.5rem" }}>
             <TypeWriter
               sentences={[
                 "I solve problems.",
@@ -52,11 +54,9 @@ export default function Home() {
         </Box>
         <Box
           maxWidth="sm"
-          sx={{
-            my: { xs: 1, md: 2 },
-            textAlign: { xs: "center", md: "left" },
-            width: { xs: "100%", md: "50%" },
-          }}
+          my={{ xs: 1, md: 2 }}
+          textAlign={{ xs: "center", md: "left" }}
+          width={{ xs: "100%", md: "50%" }}
         >
           <Typography
             variant="subtitle1"
@@ -73,18 +73,60 @@ export default function Home() {
               <b>UI/UX Design</b>.
             </p>
           </Typography>
-          <Typography
-            variant="subtitle1"
-            fontSize={{ xs: "1rem", md: "1.2rem" }}
-            sx={{ mt: 2 }}
-          >
-            <GitHubCalendar
-              username="davidyen-888"
-              colorScheme={theme === "dark" ? "dark" : "light"}
-            />
-          </Typography>
+          {/* Blog previews */}
+          <Box maxWidth="md" mt="2rem">
+            <Typography
+              variant="h3"
+              fontWeight={"bold"}
+              textAlign={"center"}
+              fontSize={{ xs: "1.2rem", md: "2.5rem" }}
+              mb={"2rem"}
+            >
+              <Link
+                href="/posts"
+                style={{
+                  textDecoration: "none",
+                  color: theme === "light" ? "#000" : "#fff",
+                }}
+              >
+                Latest Blog Posts 📝
+              </Link>
+            </Typography>
+            {posts.map((post: BlogPost) => (
+              <Box key={post.id} mb={"1.2rem"}>
+                <Link
+                  href={`/posts/${post.slug}`}
+                  style={{
+                    color: theme === "light" ? "#000" : "#ccc",
+                  }}
+                >
+                  <Typography variant="h6">{post.title}</Typography>
+                </Link>
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    color: theme === "light" ? "#000" : "#ccc",
+                  }}
+                >
+                  <Date dateString={post.date} />
+                </Typography>
+              </Box>
+            ))}
+          </Box>
         </Box>
       </Container>
     </Layout>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const notionService = new NotionService();
+  const posts = await notionService.getLatestThreeBlogPosts();
+
+  return {
+    props: {
+      posts,
+    },
+    revalidate: 60, // 1 minute
+  };
+};

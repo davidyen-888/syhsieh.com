@@ -42,6 +42,34 @@ export default class NotionService {
         
     }
 
+    async getLatestThreeBlogPosts(): Promise<BlogPost[]> {
+        const databaseId = process.env.NOTION_DATABASE_ID ?? '';
+
+        // list blog posts
+        const response = await this.client.databases.query({
+            database_id: databaseId,
+            filter: {
+                property: 'Published',
+                checkbox:{
+                    equals: true,
+                },
+            },
+            sorts: [
+                {
+                    property: 'Created',
+                    direction: 'descending',
+                },
+            ],
+            page_size: 3,
+        });
+
+        return response.results.map((res) => {
+            return NotionService.pageToPostTransformer(res);
+        }
+        );
+
+    }
+
     async getBlogPostsByTag(tagName: string): Promise<BlogPost[]> {
         const databaseId = process.env.NOTION_DATABASE_ID ?? '';
       
@@ -76,9 +104,6 @@ export default class NotionService {
         });
       }
       
-      
-      
-
     async getSingleBlogPost(slug: string): Promise<PostPage> {
         const databaseId = process.env.NOTION_DATABASE_ID ?? '';
 
