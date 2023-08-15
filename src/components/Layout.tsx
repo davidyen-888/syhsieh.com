@@ -37,7 +37,7 @@ const Layout = (props: LayoutProps) => {
           name="og:title"
           content={props.title || "Sung-Yan(David) Hsieh"}
         />
-        <meta property="og:image" content="/images/profile.jpg" />
+        <meta property="og:image" content="/images/profile.webp" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:url" content="https://syhsieh.com" />

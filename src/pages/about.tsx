@@ -39,7 +39,7 @@ export default function About() {
           }}
         >
           <Image
-            src="/images/profile.jpg"
+            src="/images/profile.webp"
             width={320}
             duration={2000}
             alt="Sung-Yan(David) Hsieh's profile picture"
