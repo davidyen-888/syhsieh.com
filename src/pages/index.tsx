@@ -8,6 +8,7 @@ import NotionService from "@/lib/notionService";
 import Link from "next/link";
 import { BlogPost } from "@/types/schema";
 import Date from "@/components/Date";
+import Image from "next/image";
 
 export default function Home({
   posts,
@@ -41,6 +42,12 @@ export default function Home({
             <WavingHand />, I'm Sung-Yan(David) Hsieh
           </Typography>
         </Box>
+        <Image
+          src="/images/codeTyping.svg"
+          width={320}
+          height={320}
+          alt="Code-typing"
+        />
         <Box height={"2rem"} my={2}>
           <Typography fontSize={{ xs: "1.2rem", md: "1.5rem" }}>
             <TypeWriter
