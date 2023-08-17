@@ -76,8 +76,8 @@ export default function Home({
             </p>
             <br />
             <p>
-              What interests me the most now is <b>Web Development</b> and{" "}
-              <b>UI/UX Design</b>.
+              Feel free to take a look at my blog posts, which mostly revolve
+              around web development and software engineering topics.
             </p>
           </Typography>
           {/* Blog previews */}
@@ -96,7 +96,7 @@ export default function Home({
                   color: theme === "light" ? "#000" : "#fff",
                 }}
               >
-                Latest Blog Posts 📝
+                Latest Blog Posts
               </Link>
             </Typography>
             {posts.map((post: BlogPost) => (
