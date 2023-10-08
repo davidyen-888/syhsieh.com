@@ -85,33 +85,31 @@ export const getStaticProps = async () => {
   const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
   const photos: Photo[] = [];
   const seenPhotoIds = new Set<string>(); // To prevent duplicates
-
   let url = `https://graph.instagram.com/me/media?fields=id,media_url&access_token=${accessToken}&limit=100`;
-  const fetchPromises: Promise<any>[] = [];
+  let hasMoreData = true;
 
-  while (url) {
-    fetchPromises.push(fetcher(url));
+  while (hasMoreData) {
     const data = await fetcher(url);
-    if (data.data) {
-      // Filter out photos that have already been seen
-      const newPhotos = data.data.filter(
-        (photo: Photo) => !seenPhotoIds.has(photo.id)
-      );
-      // Add new photos to the list of photos
-      newPhotos.forEach((photo: Photo) => seenPhotoIds.add(photo.id));
-      photos.push(...newPhotos);
-    } else {
-      console.error(data);
+
+    if (!data || !data.data) {
+      console.error("Error fetching data from Instagram API:", data);
+      break;
     }
 
+    // Filter and add new photos to the list of photos
+    const newPhotos = data.data.filter(
+      (photo: Photo) => !seenPhotoIds.has(photo.id)
+    );
+    newPhotos.forEach((photo: Photo) => seenPhotoIds.add(photo.id));
+    photos.push(...newPhotos);
+
+    // Check for pagination
     if (data.paging && data.paging.next) {
       url = data.paging.next;
     } else {
-      url = "";
+      hasMoreData = false;
     }
   }
-
-  await Promise.all(fetchPromises); // Wait for all concurrent requests to complete
 
   return {
     props: {
