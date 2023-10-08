@@ -88,33 +88,42 @@ export const getStaticProps = async () => {
   let url = `https://graph.instagram.com/me/media?fields=id,media_url&access_token=${accessToken}&limit=100`;
   let hasMoreData = true;
 
-  while (hasMoreData) {
-    const data = await fetcher(url);
+  try {
+    while (hasMoreData) {
+      const data = await fetcher(url);
 
-    if (!data || !data.data) {
-      console.error("Error fetching data from Instagram API:", data);
-      break;
+      if (!data || !data.data) {
+        throw new Error("Error fetching data from Instagram API");
+      }
+
+      // Filter and add new photos to the list of photos
+      const newPhotos = data.data.filter(
+        (photo: Photo) => !seenPhotoIds.has(photo.id)
+      );
+      newPhotos.forEach((photo: Photo) => seenPhotoIds.add(photo.id));
+      photos.push(...newPhotos);
+
+      // Check for pagination
+      if (data.paging && data.paging.next) {
+        url = data.paging.next;
+      } else {
+        hasMoreData = false;
+      }
     }
 
-    // Filter and add new photos to the list of photos
-    const newPhotos = data.data.filter(
-      (photo: Photo) => !seenPhotoIds.has(photo.id)
-    );
-    newPhotos.forEach((photo: Photo) => seenPhotoIds.add(photo.id));
-    photos.push(...newPhotos);
-
-    // Check for pagination
-    if (data.paging && data.paging.next) {
-      url = data.paging.next;
-    } else {
-      hasMoreData = false;
-    }
+    return {
+      props: {
+        photos,
+      },
+      revalidate: 60, // 1 minute
+    };
+  } catch (error) {
+    console.error("Error fetching data from Instagram API:", error);
+    return {
+      props: {
+        photos: [],
+      },
+      revalidate: 60, // 1 minute
+    };
   }
-
-  return {
-    props: {
-      photos,
-    },
-    revalidate: 60, // 1 minute
-  };
 };

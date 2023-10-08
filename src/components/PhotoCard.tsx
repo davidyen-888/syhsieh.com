@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import Image from "next/image";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useState } from "react";
 
 export default function PhotoCard({ imgPath }: { imgPath: string }) {
@@ -19,8 +19,7 @@ export default function PhotoCard({ imgPath }: { imgPath: string }) {
         },
       }}
     >
-      <Image
-        unoptimized
+      <LazyLoadImage
         src={imgPath}
         width={320}
         height={320}
