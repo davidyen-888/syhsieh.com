@@ -1,9 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
+import { DynamoDB } from "@aws-sdk/client-dynamodb";
 
 // Use the AWS SDK to access your DynamoDB table here
 const ddbTableName = 'VisitorCount';
-const dynamodb = new DocumentClient();
+const dynamodb = DynamoDBDocument.from(new DynamoDB());
 const cookieName = 'visitorCountIncremented';
 
 export default async function handler(
@@ -24,8 +25,7 @@ async function incrementVisitorCount(res: NextApiResponse, req: NextApiRequest) 
     .get({
       TableName: ddbTableName,
       Key: { id: 'count' },
-    })
-    .promise();
+    });
 
   const count = response.Item?.visitor_count ?? 0;
 
@@ -49,8 +49,7 @@ async function incrementVisitorCount(res: NextApiResponse, req: NextApiRequest) 
         UpdateExpression: 'set visitor_count = :c',
         ExpressionAttributeValues: { ':c': newCount },
         ReturnValues: 'UPDATED_NEW',
-      })
-      .promise();
+      });
   }
 
   return { Count: newCount };
