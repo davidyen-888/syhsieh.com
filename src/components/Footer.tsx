@@ -1,3 +1,5 @@
+import React from "react";
+import useSWR from "swr";
 import Typography from "@mui/material/Typography";
 import MuiLink from "@mui/material/Link";
 import { Box, Container, Divider } from "@mui/material";
@@ -9,11 +11,35 @@ import {
   BsTwitter,
 } from "react-icons/bs";
 import { IoDocumentTextSharp } from "react-icons/io5";
-import VisitorCount from "./VisitorCount";
-import { useTheme } from "next-themes";
 
-export default function Footer() {
-  const { theme } = useTheme();
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
+
+const VisitorCount = () => {
+  const { data: count } = useSWR("./api/count", fetcher, {
+    onErrorRetry: (error) => {
+      // Never retry on 404.
+      if (error.status === 404) return;
+    },
+  });
+  const { data: count2 } = useSWR("../api/count", fetcher);
+
+  const visitorCount = count?.Count || count2?.Count || null;
+
+  return (
+    <span>
+      {visitorCount !== null ? (
+        <>
+          You are the<strong> {visitorCount}</strong>th visitor since
+          03/01/2023!
+        </>
+      ) : (
+        <>Loading...</>
+      )}
+    </span>
+  );
+};
+
+const FooterWithVisitorCount = () => {
   return (
     <Container sx={{ mt: "2rem", mb: "1.5rem" }}>
       <hr
@@ -76,8 +102,11 @@ export default function Footer() {
           Sung-Yan(David) Hsieh
         </MuiLink>{" "}
         {new Date().getFullYear()}.
+        <br />
         <VisitorCount />
       </Typography>
     </Container>
   );
-}
+};
+
+export default FooterWithVisitorCount;

@@ -109,15 +109,7 @@ export default function Post({
           </Typography>
         </Box>
         <Box my={2}>
-          <Typography
-            variant="body1"
-            sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}
-          >
-            <ReactMarkdown
-              components={markdownComponents}
-              children={markdown}
-            />
-          </Typography>
+          <ReactMarkdown components={markdownComponents} children={markdown} />
         </Box>
         <Grid
           mt={"2rem"}

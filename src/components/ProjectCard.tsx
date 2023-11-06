@@ -99,6 +99,7 @@ export default function ProjectCard(props: ProjectProps) {
               Skills:{" "}
               {props.skills.map((skill, index) => (
                 <span
+                  key={index}
                   style={{
                     fontWeight: "normal",
                   }}

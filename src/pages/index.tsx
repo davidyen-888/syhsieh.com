@@ -47,6 +47,7 @@ export default function Home({
           width={320}
           height={320}
           alt="Code-typing"
+          priority
         />
         <Box height={"2rem"} my={2}>
           <Typography fontSize={{ xs: "1.2rem", md: "1.5rem" }}>
@@ -93,7 +94,7 @@ export default function Home({
                 href="/posts"
                 style={{
                   textDecoration: "none",
-                  color: theme === "light" ? "#000" : "#fff",
+                  color: theme === "light" ? "#000" : "#ccc",
                 }}
               >
                 Latest Blog Posts

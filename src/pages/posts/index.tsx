@@ -143,12 +143,8 @@ export default function PostsPage({
               style={{ padding: "8px", fontSize: "1rem" }}
               onChange={(e) => setSortOrder(e.target.value)}
             >
-              <option value="desc">
-                <Typography>Newest first</Typography>
-              </option>
-              <option value="asc">
-                <Typography>Oldest first</Typography>
-              </option>
+              <option value="desc">Newest first</option>
+              <option value="asc">Oldest first</option>
             </select>
           </div>
         </form>

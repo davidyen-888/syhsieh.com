@@ -1,27 +1,48 @@
+import { Link, Typography } from "@mui/material";
+
 const markdownComponents = {
   p: ({ children }: { children: React.ReactNode }) => (
-    <p style={{ margin: "1.5rem 0", lineHeight: "2rem" }}>{children}</p>
+    <Typography variant="body1" paragraph sx={{ lineHeight: "2rem" }}>
+      {children}
+    </Typography>
   ),
   h1: ({ children }: { children: React.ReactNode }) => (
-    <h1 style={{ margin: "1.5rem 0" }}> {children}</h1>
+    <Typography variant="h3" paragraph sx={{ margin: "1.5rem 0" }}>
+      {children}
+    </Typography>
   ),
   h2: ({ children }: { children: React.ReactNode }) => (
-    <h2 style={{ margin: "1.5rem 0" }}> {children}</h2>
+    <Typography
+      variant="h4"
+      fontWeight="bold"
+      paragraph
+      sx={{ marginY: "1.5rem" }}
+    >
+      {children}
+    </Typography>
   ),
   h3: ({ children }: { children: React.ReactNode }) => (
-    <h3 style={{ margin: "1.5rem 0" }}> {children}</h3>
+    <Typography variant="h5" paragraph sx={{ margin: "1.5rem 0" }}>
+      {children}
+    </Typography>
   ),
   ul: ({ children }: { children: React.ReactNode }) => (
-    <ul style={{ marginLeft: "2rem", lineHeight: "2rem" }}>{children}</ul>
+    <Typography component="ul" sx={{ marginLeft: "2rem", lineHeight: "2rem" }}>
+      {children}
+    </Typography>
   ),
   ol: ({ children }: { children: React.ReactNode }) => (
-    <ol style={{ marginLeft: "2rem", lineHeight: "2rem" }}>{children}</ol>
+    <Typography component="ol" sx={{ marginLeft: "2rem", lineHeight: "2rem" }}>
+      {children}
+    </Typography>
   ),
   li: ({ children }: { children: React.ReactNode }) => (
-    <li style={{ margin: "0.5rem 0" }}>{children}</li>
+    <Typography component="li" sx={{ margin: "0.5rem 0" }}>
+      {children}
+    </Typography>
   ),
   a: ({ children, href }: { children: React.ReactNode; href?: string }) => (
-    <a
+    <Link
       href={href}
       target="blank"
       style={{
@@ -31,7 +52,7 @@ const markdownComponents = {
       }}
     >
       {children}
-    </a>
+    </Link>
   ),
   img: ({ src, alt }: any) => (
     <img
@@ -45,13 +66,9 @@ const markdownComponents = {
     />
   ),
   pre: ({ children }: { children: any }) => (
-    <pre
-      style={{
-        fontSize: "1rem",
-      }}
-    >
+    <Typography component="pre" sx={{ fontSize: "1rem" }}>
       {children}
-    </pre>
+    </Typography>
   ),
 };
 

@@ -1,7 +1,6 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -59,7 +58,7 @@ function ResponsiveAppBar(props: NavProps) {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
+            <Button
               size="large"
               aria-label="open drawer"
               aria-controls="menu-appbar"
@@ -68,7 +67,7 @@ function ResponsiveAppBar(props: NavProps) {
               color="inherit"
             >
               <MenuIcon />
-            </IconButton>
+            </Button>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -128,7 +127,7 @@ function ResponsiveAppBar(props: NavProps) {
             ))}
           </Box>
           {/* Dark mode toggle */}
-          <IconButton aria-label="dark mode toggle" color="inherit">
+          <Button aria-label="dark mode toggle" color="inherit">
             {props.theme === "dark" ? (
               <Brightness4Icon
                 onClick={() => props.setTheme("light")}
@@ -140,7 +139,7 @@ function ResponsiveAppBar(props: NavProps) {
                 sx={{ color: "white" }}
               />
             )}
-          </IconButton>
+          </Button>
         </Toolbar>
       </Container>
     </AppBar>

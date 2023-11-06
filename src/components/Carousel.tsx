@@ -1,4 +1,4 @@
-import { Box, Card, CardMedia, IconButton } from "@mui/material";
+import { Box, Card, CardMedia, Button } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { useState } from "react";
 
@@ -37,7 +37,7 @@ export default function Carousel({ imagePaths }: CarouselProps) {
         {/* only show icon if imagePaths has more than 1 image */}
         {imagePaths.length > 1 && (
           <>
-            <IconButton
+            <Button
               sx={{
                 position: "absolute",
                 top: "50%",
@@ -52,8 +52,8 @@ export default function Carousel({ imagePaths }: CarouselProps) {
                   height: "3rem",
                 }}
               />
-            </IconButton>
-            <IconButton
+            </Button>
+            <Button
               sx={{
                 position: "absolute",
                 top: "50%",
@@ -68,7 +68,7 @@ export default function Carousel({ imagePaths }: CarouselProps) {
                   height: "3rem",
                 }}
               />
-            </IconButton>
+            </Button>
           </>
         )}
       </Card>
