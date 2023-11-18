@@ -47,7 +47,7 @@ export default function Home({
           width={320}
           height={320}
           alt="Code-typing"
-          priority
+          quality={50}
         />
         <Box height={"2rem"} my={2}>
           <Typography fontSize={{ xs: "1.2rem", md: "1.5rem" }}>

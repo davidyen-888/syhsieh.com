@@ -7,22 +7,17 @@ const markdownComponents = {
     </Typography>
   ),
   h1: ({ children }: { children: React.ReactNode }) => (
-    <Typography variant="h3" paragraph sx={{ margin: "1.5rem 0" }}>
+    <Typography variant="h4" paragraph sx={{ margin: "1.5rem 0" }}>
       {children}
     </Typography>
   ),
   h2: ({ children }: { children: React.ReactNode }) => (
-    <Typography
-      variant="h4"
-      fontWeight="bold"
-      paragraph
-      sx={{ marginY: "1.5rem" }}
-    >
+    <Typography variant="h5" paragraph sx={{ margin: "1.5rem 0" }}>
       {children}
     </Typography>
   ),
   h3: ({ children }: { children: React.ReactNode }) => (
-    <Typography variant="h5" paragraph sx={{ margin: "1.5rem 0" }}>
+    <Typography variant="h6" paragraph sx={{ margin: "1.5rem 0" }}>
       {children}
     </Typography>
   ),
@@ -37,7 +32,7 @@ const markdownComponents = {
     </Typography>
   ),
   li: ({ children }: { children: React.ReactNode }) => (
-    <Typography component="li" sx={{ margin: "0.5rem 0" }}>
+    <Typography component="li" sx={{ margin: "0.5rem 0", lineHeight: "2rem" }}>
       {children}
     </Typography>
   ),

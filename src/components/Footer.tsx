@@ -15,15 +15,17 @@ import { IoDocumentTextSharp } from "react-icons/io5";
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 const VisitorCount = () => {
-  const { data: count } = useSWR("./api/count", fetcher, {
+  const baseUrl = window.location.origin;
+  const apiUrl = `${baseUrl}/api/count`;
+
+  const { data: count } = useSWR(apiUrl, fetcher, {
     onErrorRetry: (error) => {
       // Never retry on 404.
       if (error.status === 404) return;
     },
   });
-  const { data: count2 } = useSWR("../api/count", fetcher);
 
-  const visitorCount = count?.Count || count2?.Count || null;
+  const visitorCount = count?.Count || null;
 
   return (
     <span>

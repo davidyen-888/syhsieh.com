@@ -130,7 +130,16 @@ export default function Post({
             marginTop={"2rem"}
             sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}
           >
-            <Link href="/posts">← Back to all posts</Link>
+            <Link
+              href="/posts"
+              style={{
+                color: "#21a1ee",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+            >
+              ← Back to all posts
+            </Link>
           </Typography>
         </Box>
       </Container>
