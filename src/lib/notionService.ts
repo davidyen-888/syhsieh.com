@@ -149,6 +149,7 @@ export default class NotionService {
             title: page.properties.Name.title[0].plain_text,
             tags: page.properties.Tags.multi_select,
             date: page.properties.Created.created_time,
+            lastUpdated: page.last_edited_time,
             slug: page.properties.Slug.formula.string,
         };
     }

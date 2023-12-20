@@ -9,6 +9,7 @@ import Prism from "../../utils/prism";
 import Link from "next/link";
 import PostNavLink from "@/components/PostNavLink";
 import markdownComponents from "@/components/MarkDownComponents";
+import { useTheme } from "next-themes";
 
 type NotionContext = {
   params: {
@@ -70,6 +71,7 @@ export default function Post({
   newerPost,
   olderPost,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { theme } = useTheme();
   const [prismLoaded, setPrismLoaded] = useState(false);
 
   // Load prism once the component has mounted
@@ -103,12 +105,26 @@ export default function Post({
             {post.title}
           </Typography>
         </Box>
-        <Box height={"2rem"} sx={{ my: 2, textAlign: "center" }}>
-          <Typography sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}>
-            <Date dateString={post.date} />
+        <Box>
+          <Typography
+            sx={{
+              fontSize: { xs: "0.8rem", md: "1rem" },
+              textAlign: "start",
+            }}
+          >
+            Created at:{" "}
+            <b>
+              <Date dateString={post.date} />
+            </b>
+            <br />
+            Last updated at:{" "}
+            <b>
+              <Date dateString={post.lastUpdated} />
+            </b>
           </Typography>
         </Box>
-        <Box my={2}>
+
+        <Box my={2} sx={{ color: theme === "dark" ? "#d3d3d3" : "#181818" }}>
           <ReactMarkdown components={markdownComponents} children={markdown} />
         </Box>
         <Grid
