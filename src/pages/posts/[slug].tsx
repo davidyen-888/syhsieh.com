@@ -1,41 +1,17 @@
-import Date from "@/components/Date";
+import { useEffect, useState } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import Layout from "@/components/Layout";
 import NotionService from "@/lib/notionService";
-import { InferGetStaticPropsType } from "next";
-import { useEffect, useState } from "react";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Prism from "../../utils/prism";
 import Link from "next/link";
 import PostNavLink from "@/components/PostNavLink";
 import markdownComponents from "@/components/MarkDownComponents";
 import { useTheme } from "next-themes";
+import Date from "@/components/Date";
 
-type NotionContext = {
-  params: {
-    slug: string;
-  };
-};
-
-export async function getStaticPaths(): Promise<{
-  paths: string[];
-  fallback: boolean;
-}> {
-  const notionService = new NotionService();
-
-  const posts = await notionService.getAllBlogPosts();
-
-  const paths = posts.map((post: { slug: string }) => {
-    return `/posts/${post.slug}`;
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export const getStaticProps = async (context: NotionContext) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const notionService = new NotionService();
 
   const postData = await notionService.getSingleBlogPost(
@@ -43,7 +19,9 @@ export const getStaticProps = async (context: NotionContext) => {
   );
 
   if (!postData) {
-    throw new Error("Post not found");
+    return {
+      notFound: true,
+    };
   }
 
   // Get the newer and older posts
@@ -70,7 +48,7 @@ export default function Post({
   post,
   newerPost,
   olderPost,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { theme } = useTheme();
   const [prismLoaded, setPrismLoaded] = useState(false);
 

@@ -1,6 +1,6 @@
 import { Container, Box, Typography, Button } from "@mui/material";
 import Layout from "@/components/Layout";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import NotionService from "@/lib/notionService";
 import { BlogPost } from "@/types/schema";
 import BlogCard from "@/components/BlogCard";
@@ -8,14 +8,13 @@ import { useEffect, useState } from "react";
 
 export default function PostsPage({
   posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [sortOrder, setSortOrder] = useState<string>("desc");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>(posts);
   const [tags, setTags] = useState<{ name: string; count: number }[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  // Extract all unique tags from posts and count number of posts with each tag
   useEffect(() => {
     const tagMap = new Map();
     posts.forEach((post: BlogPost) => {
@@ -61,13 +60,19 @@ export default function PostsPage({
     filterPosts(e.target.value);
   };
 
-  filteredPosts.sort((a: BlogPost, b: BlogPost) => {
-    if (sortOrder === "desc") {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    } else {
-      return new Date(a.date).getTime() - new Date(b.date).getTime();
-    }
-  });
+  const handleSortOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortOrder(e.target.value);
+  };
+
+  useEffect(() => {
+    filteredPosts.sort((a: BlogPost, b: BlogPost) => {
+      if (sortOrder === "desc") {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      } else {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      }
+    });
+  }, [sortOrder, filteredPosts]);
 
   return (
     <Layout title="Blog Posts">
@@ -141,13 +146,14 @@ export default function PostsPage({
               id="sort-order"
               value={sortOrder}
               style={{ padding: "8px", fontSize: "1rem" }}
-              onChange={(e) => setSortOrder(e.target.value)}
+              onChange={handleSortOrderChange}
             >
               <option value="desc">Newest first</option>
               <option value="asc">Oldest first</option>
             </select>
           </div>
         </form>
+
         <Box sx={{ my: 2 }}>
           {/* Display filtered posts */}
           {filteredPosts.map((post: BlogPost) => (
@@ -159,7 +165,7 @@ export default function PostsPage({
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const notionService = new NotionService();
   const posts = await notionService.getAllBlogPosts();
 
@@ -167,6 +173,5 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       posts,
     },
-    revalidate: 60, // 1 minute
   };
 };

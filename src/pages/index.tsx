@@ -10,9 +10,13 @@ import { BlogPost } from "@/types/schema";
 import Date from "@/components/Date";
 import Image from "next/image";
 
-export default function Home({
+interface HomeProps {
+  posts: BlogPost[];
+}
+
+const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: HomeProps) => {
   const { theme } = useTheme();
 
   return (
@@ -27,19 +31,18 @@ export default function Home({
         }}
       >
         <Box
-          display={"flex"}
-          flexDirection={"column"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          textAlign={"center"}
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          textAlign="center"
         >
           <Typography
             variant="h3"
-            fontWeight={"bold"}
+            fontWeight="bold"
             fontSize={{ xs: "2rem", md: "3rem" }}
           >
-            Hi
-            <WavingHand />, I'm Sung-Yan(David) Hsieh
+            Hi <WavingHand />, I'm Sung-Yan(David) Hsieh
           </Typography>
         </Box>
         <Image
@@ -48,9 +51,9 @@ export default function Home({
           height={320}
           alt="Code-typing"
           quality={40}
-          priority={true}
+          priority
         />
-        <Box height={"2rem"} my={2}>
+        <Box height="2rem" my={2}>
           <Typography fontSize={{ xs: "1.2rem", md: "1.5rem" }}>
             <TypeWriter
               sentences={[
@@ -86,10 +89,10 @@ export default function Home({
           <Box maxWidth="md" mt="2rem">
             <Typography
               variant="h3"
-              fontWeight={"bold"}
-              textAlign={"center"}
+              fontWeight="bold"
+              textAlign="center"
               fontSize={{ xs: "1.2rem", md: "2.5rem" }}
-              mb={"2rem"}
+              mb="2rem"
             >
               <Link
                 href="/posts"
@@ -101,8 +104,8 @@ export default function Home({
                 Latest Blog Posts
               </Link>
             </Typography>
-            {posts.map((post: BlogPost) => (
-              <Box key={post.id} mb={"1.2rem"}>
+            {posts.map((post) => (
+              <Box key={post.id} mb="1.2rem">
                 <Link
                   href={`/posts/${post.slug}`}
                   style={{
@@ -126,9 +129,9 @@ export default function Home({
       </Container>
     </Layout>
   );
-}
+};
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const notionService = new NotionService();
   const posts = await notionService.getLatestThreeBlogPosts();
 
@@ -139,3 +142,5 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 60, // 1 minute
   };
 };
+
+export default Home;
