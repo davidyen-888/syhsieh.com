@@ -1,4 +1,5 @@
 import { Link, Typography } from "@mui/material";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const markdownComponents = {
   p: ({ children }: { children: React.ReactNode }) => (
@@ -50,7 +51,7 @@ const markdownComponents = {
     </Link>
   ),
   img: ({ src, alt }: any) => (
-    <img
+    <LazyLoadImage
       src={src}
       alt={alt}
       style={{
