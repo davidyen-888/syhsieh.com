@@ -55,9 +55,10 @@ const markdownComponents = {
       src={src}
       alt={alt}
       style={{
-        width: "100%",
+        display: "flex",
+        width: "50%",
         height: "auto",
-        margin: "1.5rem 0",
+        margin: "1.5rem auto",
       }}
     />
   ),
