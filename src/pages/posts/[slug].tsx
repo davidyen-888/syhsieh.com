@@ -14,9 +14,10 @@ import Date from "@/components/Date";
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const notionService = new NotionService();
 
-  const postData = await notionService.getSingleBlogPost(
-    context.params?.slug as string
-  );
+  const [postData, allPosts] = await Promise.all([
+    notionService.getSingleBlogPost(context.params?.slug as string),
+    notionService.getAllBlogPosts(),
+  ]);
 
   if (!postData) {
     return {
@@ -24,8 +25,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  // Get the newer and older posts
-  const allPosts = await notionService.getAllBlogPosts();
   // Find the index of the current post
   const currentPostIndex = allPosts.findIndex(
     (post: { slug: string }) => post.slug === context.params?.slug
