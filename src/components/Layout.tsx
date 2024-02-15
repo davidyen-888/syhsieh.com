@@ -30,7 +30,7 @@ const Layout = (props: LayoutProps) => {
         <title>{props.title || "Sung-Yan(David) Hsieh"} </title>
         <meta
           name="description"
-          content="Sung-Yan(David) Hsieh's personal website"
+          content={props.title || "Sung-Yan(David) Hsieh's personal website"}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
