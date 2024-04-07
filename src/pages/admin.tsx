@@ -1,16 +1,16 @@
 import Layout from "@/components/Layout";
-import { Container, Typography, Button } from "@mui/material"; // Import MUI components
+import { Container, Typography, Button } from "@mui/material";
 import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/router"; // Import useRouter hook
-import { useEffect } from "react"; // Import useEffect hook
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Admin = () => {
   const { data: session } = useSession();
-  const router = useRouter(); // Use useRouter hook
+  const router = useRouter();
 
   const handleLogout = async () => {
     await signOut();
-    router.push("/login"); // Redirect to the login page using router.push
+    router.push("/login");
   };
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const Admin = () => {
     }
   }, [session, router]);
 
+  // If session data is not available
   if (!session) {
     return null;
   }

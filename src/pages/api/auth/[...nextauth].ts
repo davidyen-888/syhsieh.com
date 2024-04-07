@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
 import { SessionOptions } from 'next-auth';
 
+// https://next-auth.js.org/providers/credentials#example---username--password
 export default NextAuth({
   providers: [
     CredentialProvider({

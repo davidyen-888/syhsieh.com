@@ -3,12 +3,10 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button, TextField, Typography, Container, Box } from "@mui/material";
 import Layout from "@/components/Layout";
-import { useTheme } from "next-themes";
 
 const LoginPage = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const { theme } = useTheme();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
