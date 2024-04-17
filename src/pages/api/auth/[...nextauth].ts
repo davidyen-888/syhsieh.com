@@ -19,6 +19,7 @@ export default NextAuth({
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     jwt: true,
   } as unknown as SessionOptions, // Cast session configuration to SessionOptions type
