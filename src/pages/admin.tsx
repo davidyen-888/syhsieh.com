@@ -68,6 +68,7 @@ const Admin = ({ accessToken }: { accessToken: string }) => {
           variant="contained"
           color="primary"
           onClick={getIGLongLivedToken}
+          sx={{ margin: "1.5rem" }}
         >
           Get IG token
         </Button>
