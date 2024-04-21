@@ -42,6 +42,7 @@
   "devDependencies": {
     "@types/mui-image": "^1.0.1",
     "@types/prismjs": "^1.26.0",
-    "@types/react-lazy-load-image-component": "^1.6.1"
+    "@types/react-lazy-load-image-component": "^1.6.1",
+    "next-auth": "^4.24.7"
   }
 }
