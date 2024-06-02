@@ -1,5 +1,6 @@
 import { Link, Typography } from "@mui/material";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 
 const markdownComponents = {
   p: ({ children }: { children: React.ReactNode }) => (
@@ -51,16 +52,18 @@ const markdownComponents = {
     </Link>
   ),
   img: ({ src, alt }: any) => (
-    <LazyLoadImage
-      src={src}
-      alt={alt}
-      style={{
-        display: "flex",
-        width: "50%",
-        height: "auto",
-        margin: "1.5rem auto",
-      }}
-    />
+    <Zoom>
+      <img
+        src={src}
+        alt={alt}
+        style={{
+          display: "flex",
+          width: "75%",
+          height: "auto",
+          margin: "1.5rem auto",
+        }}
+      />
+    </Zoom>
   ),
   pre: ({ children }: { children: any }) => (
     <Typography component="pre" sx={{ fontSize: "1rem" }}>
