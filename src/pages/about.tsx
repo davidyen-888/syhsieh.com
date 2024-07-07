@@ -59,7 +59,8 @@ export default function About() {
               <br />
               <br />
               Besides coding, I enjoy shooting film{" "}
-              <Link href="/photos">photos</Link>, watching movies, listening to{" "}
+              <Link href="https://www.instagram.com/solashot.1/">photos</Link>,
+              watching movies, listening to{" "}
               <Link href="https://open.spotify.com/playlist/6PiMsLtlebCIKkRol89WSo?si=a01c111452984684">
                 music
               </Link>

@@ -20,7 +20,7 @@ interface NavProps {
 const pages = [
   { title: "Projects", path: "/projects" },
   { title: "Blog", path: "/posts" },
-  { title: "Photos", path: "/photos" },
+  // { title: "Photos", path: "/photos" },
   { title: "About", path: "/about" },
 ];
 
