@@ -10,6 +10,7 @@ export default function PostsPage({
   posts,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [sortOrder, setSortOrder] = useState<string>("desc");
+  const [sortCriteria, setSortCriteria] = useState<keyof BlogPost>("date");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>(posts);
   const [tags, setTags] = useState<{ name: string; count: number }[]>([]);
@@ -61,18 +62,20 @@ export default function PostsPage({
   };
 
   const handleSortOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortOrder(e.target.value);
+    const value = e.target.value;
+    const [criteria, order] = value.split("-");
+    setSortCriteria(criteria as keyof BlogPost);
+    setSortOrder(order);
   };
 
   useEffect(() => {
-    filteredPosts.sort((a: BlogPost, b: BlogPost) => {
-      if (sortOrder === "desc") {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
-      } else {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
-      }
+    const sortedPosts = [...filteredPosts].sort((a: BlogPost, b: BlogPost) => {
+      const dateA = new Date(a[sortCriteria] as string).getTime();
+      const dateB = new Date(b[sortCriteria] as string).getTime();
+      return sortOrder === "desc" ? dateB - dateA : dateA - dateB;
     });
-  }, [sortOrder, filteredPosts]);
+    setFilteredPosts(sortedPosts);
+  }, [sortOrder, sortCriteria, filteredPosts]);
 
   return (
     <Layout title="Blog Posts">
@@ -144,12 +147,14 @@ export default function PostsPage({
           <div style={{ margin: "16px 0" }}>
             <select
               id="sort-order"
-              value={sortOrder}
+              value={`${sortCriteria}-${sortOrder}`}
               style={{ padding: "8px", fontSize: "1rem" }}
               onChange={handleSortOrderChange}
             >
-              <option value="desc">Newest first</option>
-              <option value="asc">Oldest first</option>
+              <option value="date-desc">Newest first</option>
+              <option value="date-asc">Oldest first</option>
+              <option value="lastUpdated-desc">Recently updated</option>
+              <option value="lastUpdated-asc">Least recently updated</option>
             </select>
           </div>
         </form>

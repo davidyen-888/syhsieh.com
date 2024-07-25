@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import Layout from "@/components/Layout";
@@ -65,6 +65,11 @@ export default function Post({
     }
   }, [prismLoaded]);
 
+  const markdownContent = useMemo(
+    () => <ReactMarkdown components={markdownComponents} children={markdown} />,
+    [markdown]
+  );
+
   return (
     <Layout title={post.title}>
       <Container
@@ -102,7 +107,7 @@ export default function Post({
         </Box>
 
         <Box my={2} sx={{ color: theme === "dark" ? "#d3d3d3" : "#181818" }}>
-          <ReactMarkdown components={markdownComponents} children={markdown} />
+          {markdownContent}
         </Box>
         <Grid
           mt={"2rem"}
