@@ -3,7 +3,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import Layout from "@/components/Layout";
 import NotionService from "@/lib/notionService";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Prism from "../../utils/prism";
 import Link from "next/link";
 import PostNavLink from "@/components/PostNavLink";
@@ -11,35 +11,60 @@ import markdownComponents from "@/components/MarkDownComponents";
 import { useTheme } from "next-themes";
 import Date from "@/components/Date";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticPaths = async () => {
+  const notionService = new NotionService();
+  const posts = await notionService.getAllBlogPosts();
+
+  const paths = posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { slug: string };
+}) => {
   const notionService = new NotionService();
 
-  const [postData, allPosts] = await Promise.all([
-    notionService.getSingleBlogPost(context.params?.slug as string),
-    notionService.getAllBlogPosts(),
-  ]);
+  try {
+    const [postData, allPosts] = await Promise.all([
+      notionService.getSingleBlogPost(params?.slug as string),
+      notionService.getAllBlogPosts(),
+    ]);
 
-  if (!postData) {
+    if (!postData) {
+      return {
+        notFound: true,
+      };
+    }
+
+    // Find the index of the current post
+    const currentPostIndex = allPosts.findIndex(
+      (post) => post.slug === params?.slug
+    );
+    const newerPost = allPosts[currentPostIndex - 1] || null;
+    const olderPost = allPosts[currentPostIndex + 1] || null;
+
+    return {
+      props: {
+        markdown: postData.markdown,
+        post: postData.post,
+        newerPost,
+        olderPost,
+      },
+      revalidate: 3600, // Revalidate every hour
+    };
+  } catch (error) {
     return {
       notFound: true,
     };
   }
-
-  // Find the index of the current post
-  const currentPostIndex = allPosts.findIndex(
-    (post: { slug: string }) => post.slug === context.params?.slug
-  );
-  const newerPost = allPosts[currentPostIndex - 1] || null;
-  const olderPost = allPosts[currentPostIndex + 1] || null;
-
-  return {
-    props: {
-      markdown: postData.markdown,
-      post: postData.post,
-      newerPost,
-      olderPost,
-    },
-  };
 };
 
 export default function Post({
@@ -47,7 +72,7 @@ export default function Post({
   post,
   newerPost,
   olderPost,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const { theme } = useTheme();
   const [prismLoaded, setPrismLoaded] = useState(false);
 

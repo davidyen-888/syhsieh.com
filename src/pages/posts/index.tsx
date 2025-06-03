@@ -1,6 +1,6 @@
 import { Container, Box, Typography, Button } from "@mui/material";
 import Layout from "@/components/Layout";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { InferGetStaticPropsType } from "next";
 import NotionService from "@/lib/notionService";
 import { BlogPost } from "@/types/schema";
 import BlogCard from "@/components/BlogCard";
@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 export default function PostsPage({
   posts,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const [sortOrder, setSortOrder] = useState<string>("desc");
   const [sortCriteria, setSortCriteria] = useState<keyof BlogPost>("date");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -170,7 +170,7 @@ export default function PostsPage({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps = async () => {
   const notionService = new NotionService();
   const posts = await notionService.getAllBlogPosts();
 
@@ -178,5 +178,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       posts,
     },
+    // Revalidate every hour
+    revalidate: 3600,
   };
 };

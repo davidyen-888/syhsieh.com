@@ -2,26 +2,64 @@ import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 import { BlogPost, PostPage } from '@/types/schema';
 
+interface Cache {
+    [key: string]: {
+        data: any;
+        timestamp: number;
+    };
+}
+
 export default class NotionService {
     client: Client;
     notionToMarkdown: NotionToMarkdown;
+    private cache: Cache;
+    private cacheDuration: number;
 
     constructor() {
         this.client = new Client({ auth: process.env.NOTION_ACESS_TOKEN });
         this.notionToMarkdown = new NotionToMarkdown({
             notionClient: this.client,
         });
+        this.cache = {};
+        // Cache duration of 1 hour
+        this.cacheDuration = 60 * 60 * 1000;
+    }
+
+    private getCacheKey(method: string, params?: any): string {
+        return `${method}:${JSON.stringify(params)}`;
+    }
+
+    private getFromCache<T>(key: string): T | null {
+        const cached = this.cache[key];
+        if (!cached) return null;
+
+        const now = Date.now();
+        if (now - cached.timestamp > this.cacheDuration) {
+            delete this.cache[key];
+            return null;
+        }
+
+        return cached.data as T;
+    }
+
+    private setCache(key: string, data: any): void {
+        this.cache[key] = {
+            data,
+            timestamp: Date.now(),
+        };
     }
 
     async getAllBlogPosts(): Promise<BlogPost[]> {
-        const databaseId = process.env.NOTION_DATABASE_ID ?? '';
+        const cacheKey = this.getCacheKey('getAllBlogPosts');
+        const cached = this.getFromCache<BlogPost[]>(cacheKey);
+        if (cached) return cached;
 
-        // list blog posts
+        const databaseId = process.env.NOTION_DATABASE_ID ?? '';
         const response = await this.client.databases.query({
             database_id: databaseId,
             filter: {
                 property: 'Published',
-                checkbox:{
+                checkbox: {
                     equals: true,
                 },
             },
@@ -32,14 +70,13 @@ export default class NotionService {
                 },
             ],
         });
-            
-        
 
-        return response.results.map((res) => {
+        const posts = response.results.map((res) => {
             return NotionService.pageToPostTransformer(res);
-        }
-        );
-        
+        });
+
+        this.setCache(cacheKey, posts);
+        return posts;
     }
 
     async getLatestThreeBlogPosts(): Promise<BlogPost[]> {
@@ -105,9 +142,11 @@ export default class NotionService {
       }
       
     async getSingleBlogPost(slug: string): Promise<PostPage> {
-        const databaseId = process.env.NOTION_DATABASE_ID ?? '';
+        const cacheKey = this.getCacheKey('getSingleBlogPost', { slug });
+        const cached = this.getFromCache<PostPage>(cacheKey);
+        if (cached) return cached;
 
-        // list of blog posts
+        const databaseId = process.env.NOTION_DATABASE_ID ?? '';
         const response = await this.client.databases.query({
             database_id: databaseId,
             filter: {
@@ -124,17 +163,14 @@ export default class NotionService {
             throw new Error('Blog post not found');
         }
 
-        // get blog post
         const page = response.results[0];
-
         const mdBlock = await this.notionToMarkdown.pageToMarkdown(page.id);
         const markdown = this.notionToMarkdown.toMarkdownString(mdBlock);
         const post = NotionService.pageToPostTransformer(page);
 
-        return {
-            post,
-            markdown,
-        };
+        const result = { post, markdown };
+        this.setCache(cacheKey, result);
+        return result;
     }
         
 
